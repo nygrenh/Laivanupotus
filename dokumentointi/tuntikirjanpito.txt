@@ -1,3 +1,4 @@
 # Ohjelmoinnin harjoitustyön tuntikirjanpito.
 
 Päivämäärä | Ajan käytön kohde | Käytetty aika
+2013-09-05 | Aihemäärittelyn kirjoittaminen ja Git-repon alustaminen | 1 tunti
