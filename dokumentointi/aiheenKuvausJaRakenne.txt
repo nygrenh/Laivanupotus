@@ -1,8 +1,11 @@
-Aihe: Laivanupotus
+# Aiheen kuvaus
+
+## Aihe: Laivanupotus
 Tehdään peli, jolla pystyy pelaamaan laivanupotusta tietokonetta vastaan.
 
-Käyttäjät: Pelaaja
+## Käyttäjät: 
+	*Pelaaja
 
-Pelaajan toiminnot:
+## Pelaajan toiminnot:
 	* Aseta omat laivat kartalle
 	* Pommita vastustajan laivoja
