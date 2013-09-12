@@ -8,4 +8,10 @@ public class Ruutu {
         laiva = null;
         onPommitettu = false;
     }
+
+    public Laiva getLaiva() {
+        return laiva;
+    }
+    
+    
 }
