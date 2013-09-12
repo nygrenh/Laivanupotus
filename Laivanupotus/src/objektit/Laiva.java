@@ -11,6 +11,7 @@ public class Laiva {
     }
     
     public boolean onTuhottu(){
+        if(this.ruudut==null) return false;
         int laskuri = 0;
         for(Ruutu r : ruudut){
             if(r.onPommitettu()) laskuri++;
