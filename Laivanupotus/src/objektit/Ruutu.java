@@ -12,6 +12,6 @@ public class Ruutu {
     public Laiva getLaiva() {
         return laiva;
     }
-    
-    
+
+
 }

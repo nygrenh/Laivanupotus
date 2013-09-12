@@ -2,9 +2,11 @@ package objektit;
 
 public class Pelilauta {
     private Ruutu[][] ruudut;
+    private boolean[][] pommitetutruudut; 
     
     public Pelilauta(int koko){
         ruudut = new Ruutu[10][10];
+        pommitetutruudut = new boolean[ruudut.length][ruudut[0].length];
         for(int i=0; i<ruudut.length; i++){
             for(int j=0; j<ruudut[0].length; j++){
                 ruudut[i][j] = new Ruutu();
@@ -20,11 +22,15 @@ public class Pelilauta {
     }
     
     public boolean pommita(int x, int y){
+        pommitetutruudut[x][y] = true;
         Laiva laiva = ruudut[x][y].getLaiva();
         if(laiva == null){
             return false;
         }
-        return true;
-        
+        return true;      
+    }
+    
+    public boolean ruutuaOnJoPommitettu(int x, int y){
+        return pommitetutruudut[x][y];
     }
 }

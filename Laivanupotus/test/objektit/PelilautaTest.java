@@ -30,5 +30,15 @@ public class PelilautaTest {
         assertFalse(lauta.pommita(0, 0));
     }
     
+    @Test
+    public void ruutuaOnJoPommitettuPalauttaaFalseJosRuutuaEiOlePommitettu(){
+        assertFalse(lauta.ruutuaOnJoPommitettu(3, 3));
+    }
+    
+    @Test
+    public void ruutuaOnJoPommitettuPalauttaaTrueJosRuutuaOnPommitettu(){
+        lauta.pommita(7, 4);
+        assertTrue(lauta.ruutuaOnJoPommitettu(7, 4));
+    }
 }
 
