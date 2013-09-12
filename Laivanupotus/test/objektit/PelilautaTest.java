@@ -25,5 +25,10 @@ public class PelilautaTest {
         assertTrue(lauta.getRuutu(9, 9) instanceof Ruutu);
     }
     
+    @Test
+    public void pommitaPalauttaaFalseJosRuudussaEiOleLaivaa(){
+        assertFalse(lauta.pommita(0, 0));
+    }
+    
 }
 

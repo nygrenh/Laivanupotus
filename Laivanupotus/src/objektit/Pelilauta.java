@@ -18,4 +18,13 @@ public class Pelilauta {
         }
         return null;
     }
+    
+    public boolean pommita(int x, int y){
+        Laiva laiva = ruudut[x][y].getLaiva();
+        if(laiva == null){
+            return false;
+        }
+        return true;
+        
+    }
 }
