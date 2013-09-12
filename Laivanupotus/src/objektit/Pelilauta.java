@@ -1,6 +1,6 @@
 package objektit;
 
-public abstract class Pelilauta {
+public class Pelilauta {
     private Ruutu[][] ruudut;
     
     public Pelilauta(int koko){

@@ -10,8 +10,7 @@ public class PelilautaTest {
     
     @Before
     public void setUp() {
-        lauta = new Pelilauta(10) {           
-        };
+        lauta = new Pelilauta(10);
     }
 
     @Test
