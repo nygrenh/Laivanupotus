@@ -40,5 +40,18 @@ public class PelilautaTest {
         lauta.pommita(7, 4);
         assertTrue(lauta.ruutuaOnJoPommitettu(7, 4));
     }
+    
+    @Test
+    public void asetaLaivaLaudallePalauttaaFalseJosYritetaanAsettaaLaivaaLaudanUlkopuolelle(){
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(2), 55, 55, 56, 55));
+    }
+    
+    @Test
+    public void asetaLaivaLaudallePalauttaaFalseJosLaivanPituusOnVaara(){
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(3), 55, 55, 56, 55));
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(2), 55, 55, 56, 55));
+    }
+    
+    
 }
 

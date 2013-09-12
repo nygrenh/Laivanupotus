@@ -16,4 +16,7 @@ public class Ruutu {
     public boolean onPommitettu(){
         return onPommitettu;
     }
+    public void pommita(){
+        onPommitettu = true;
+    }
 }

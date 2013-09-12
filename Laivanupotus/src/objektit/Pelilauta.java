@@ -1,5 +1,7 @@
 package objektit;
 
+import java.util.ArrayList;
+
 public class Pelilauta {
     private Ruutu[][] ruudut;
     private boolean[][] pommitetutruudut; 
@@ -15,7 +17,7 @@ public class Pelilauta {
     }
     
     public Ruutu getRuutu(int x, int y){
-        if(x>=0 && y>=0 && x<ruudut.length && y<ruudut[0].length){
+        if(koordinaatitOnPelilaudanRajojenSisalla(x, y)){
             return ruudut[x][y];
         }
         return null;
@@ -32,5 +34,27 @@ public class Pelilauta {
     
     public boolean ruutuaOnJoPommitettu(int x, int y){
         return pommitetutruudut[x][y];
+    }
+    
+    public boolean asetaLaivaLaudalle(Laiva laiva, int alkuX, int alkuY, int loppuX, int loppuY){
+        if(!koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY) || !koordinaatitOnPelilaudanRajojenSisalla(loppuX, loppuY)){
+            return false;
+        }
+        int pituus = (alkuX+alkuY)-(loppuX+loppuY);
+        if(pituus != laiva.getPituus()){
+            return false;
+        }
+        ArrayList<Ruutu> ruudut = new ArrayList<>();
+        for(int x=alkuX; alkuX<=loppuX;x++){
+            for(int y=alkuY; alkuY<=loppuY;y++){
+                ruudut.add(this.ruudut[x][y]);
+            }
+        }
+        laiva.asetaRuudut(ruudut);
+        return true;
+    }
+
+    private boolean koordinaatitOnPelilaudanRajojenSisalla(int x, int y) {
+        return x>=0 && y>=0 && x<ruudut.length && y<ruudut[0].length;
     }
 }
