@@ -13,5 +13,7 @@ public class Ruutu {
         return laiva;
     }
 
-
+    public boolean onPommitettu(){
+        return onPommitettu;
+    }
 }
