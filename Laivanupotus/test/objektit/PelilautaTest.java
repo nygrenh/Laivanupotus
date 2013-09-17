@@ -48,8 +48,8 @@ public class PelilautaTest {
     
     @Test
     public void asetaLaivaLaudallePalauttaaFalseJosLaivanPituusOnVaara(){
-        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(3), 55, 55, 56, 55));
-        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(2), 55, 55, 56, 55));
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(1), 1, 1, 1, 2));
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(3), 1, 1, 1, 2));
     }
     
     
