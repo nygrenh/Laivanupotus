@@ -18,7 +18,7 @@ public class LaivaTest {
     @Before
     public void setUp() {
         lauta = new Pelilauta(10);
-        laiva = new Laiva(3);
+        laiva = new Laiva(3, "Kumivene");
         ruutu1 = new Ruutu();
         ruutu2 = new Ruutu();
         ruutu3 = new Ruutu();

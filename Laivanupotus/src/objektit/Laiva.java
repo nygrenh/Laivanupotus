@@ -5,9 +5,11 @@ import java.util.List;
 public class Laiva {
     private List<Ruutu> ruudut;
     private int pituus;
+    private String nimi;
     
-    public Laiva(int pituus){
+    public Laiva(int pituus, String nimi){
         this.pituus = pituus;
+        this.nimi = nimi;
     }
     
     public boolean onTuhottu(){
