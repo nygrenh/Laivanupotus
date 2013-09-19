@@ -5,4 +5,5 @@ Päivämäärä | Ajan käytön kohde | Käytetty aika
 2013-09-10 | Sekavien kaavioden raapustaminen paperille | 1 tunti
 2013-09-11 | Ohjelman rakenteen miettiminen ja ohjelmointi | 2 tuntia
 2013-09-12 | Ohjelmointi | 4 tuntia
-
+2013-09-17 | Ohjelmointi | 1 tunti
+2013-09-19 | Ohjelman suunnittelua ja totetusta | 3 tuntia
