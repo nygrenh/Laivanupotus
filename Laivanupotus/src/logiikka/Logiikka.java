@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import objektit.Laiva;
 import toimijat.Pelaaja;
+import kayttoliittyma.Kayttolittyma;
 
 public class Logiikka {
     private Pelaaja pelaaja, pelaaja2;
     
-    public Logiikka(){
-        pelaaja = new Pelaaja();
+    public Logiikka(Kayttolittyma kayttolittyma){
+        pelaaja = new Pelaaja(kayttolittyma);
         pelaaja2 = new Pelaaja();
         Collection<Laiva> pelaajanLaivat = luoUusiLaivasto();
         Collection<Laiva> pelaaja2nLaivat = luoUusiLaivasto();
@@ -31,5 +32,11 @@ public class Logiikka {
         for(int i = 0; i < lukumaara; i++){
             Laiva lisattavaLaiva = new Laiva(pituus, nimi);
         }
+    }
+    
+    public static void main(String [] args){
+        Kayttolittyma kayttolittyma = new Kayttolittyma();
+        new Logiikka(kayttolittyma);
+        kayttolittyma.run();
     }
 }

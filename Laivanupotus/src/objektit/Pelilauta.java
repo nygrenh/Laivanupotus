@@ -23,6 +23,10 @@ public class Pelilauta {
         return null;
     }
     
+    public int getKoko(){
+        return ruudut.length;
+    }
+    
     public boolean pommita(int x, int y){
         pommitetutruudut[x][y] = true;
         Laiva laiva = ruudut[x][y].getLaiva();
