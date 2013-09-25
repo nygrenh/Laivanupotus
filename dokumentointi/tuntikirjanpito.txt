@@ -7,3 +7,4 @@ Päivämäärä | Ajan käytön kohde | Käytetty aika
 2013-09-12 | Ohjelmointi | 4 tuntia
 2013-09-17 | Ohjelmointi | 1 tunti
 2013-09-19 | Ohjelman suunnittelua ja totetusta | 3 tuntia
+2013-09-25 | Käyttölittymän kokooon väsäämistä | 1 tunti
