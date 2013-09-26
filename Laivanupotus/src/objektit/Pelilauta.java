@@ -49,15 +49,11 @@ public class Pelilauta {
             return false;
         }
         ArrayList<Ruutu> ruudut = new ArrayList<>();
-        try{
         for(int x=alkuX; x<=loppuX;x++){
             for(int y=alkuY; y<=loppuY;y++){
                 ruudut.add(this.ruudut[x][y]);
                 this.ruudut[x][y].asetaruutuunLaiva(laiva);
             }
-        }
-        }catch(Exception e){
-            System.err.println("Index out of bounds");
         }
         laiva.asetaRuudut(ruudut);
         return true;
