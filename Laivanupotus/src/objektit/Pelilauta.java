@@ -29,7 +29,12 @@ public class Pelilauta {
     public int getKoko(){
         return ruudut.length;
     }
-    
+    /**
+     * Pommittaa pelilaudan ruutua
+     * @param x Ruudun x-koordinaatti 
+     * @param y Ruudun y-koordinaatti
+     * @return Palauttaa true, jos ruudussa oli laiva, ja false, jos ruudussa ei ollut laivaa
+     */
     public boolean pommita(int x, int y){
         pommitetutruudut[x][y] = true;
         Laiva laiva = ruudut[x][y].getLaiva();
