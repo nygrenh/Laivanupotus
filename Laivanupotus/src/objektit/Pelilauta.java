@@ -44,16 +44,20 @@ public class Pelilauta {
         if(!koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY) || !koordinaatitOnPelilaudanRajojenSisalla(loppuX, loppuY)){
             return false;
         }
-        int pituus = (alkuX+alkuY)-(loppuX+loppuY);
+        int pituus = (loppuX+loppuY) - (alkuX+alkuY) + 1;
         if(pituus != laiva.getPituus()){
             return false;
         }
         ArrayList<Ruutu> ruudut = new ArrayList<>();
-        for(int x=alkuX; alkuX<=loppuX;x++){
-            for(int y=alkuY; alkuY<=loppuY;y++){
+        try{
+        for(int x=alkuX; x<=loppuX;x++){
+            for(int y=alkuY; y<=loppuY;y++){
                 ruudut.add(this.ruudut[x][y]);
                 this.ruudut[x][y].asetaruutuunLaiva(laiva);
             }
+        }
+        }catch(Exception e){
+            System.err.println("Index out of bounds");
         }
         laiva.asetaRuudut(ruudut);
         return true;

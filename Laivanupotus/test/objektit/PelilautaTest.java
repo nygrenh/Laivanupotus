@@ -52,6 +52,9 @@ public class PelilautaTest {
         assertFalse(lauta.asetaLaivaLaudalle(new Laiva(3, "Kumivene"), 1, 1, 1, 2));
     }
     
-       
+    @Test
+    public void asetaLaivaLaudallePalauttaaTrueJosLaivaOnnistuttiinSijoittamaanLaudalle(){
+        assertTrue(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 1, 1, 1, 2));
+    }       
 }
 
