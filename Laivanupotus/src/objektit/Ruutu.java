@@ -23,7 +23,7 @@ public class Ruutu {
         onPommitettu = true;
     }
     public boolean ruudussaOnLaiva(){
-        return laiva == null;
+        return laiva != null;
     }
     
     public void asetaruutuunLaiva(Laiva laiva){
