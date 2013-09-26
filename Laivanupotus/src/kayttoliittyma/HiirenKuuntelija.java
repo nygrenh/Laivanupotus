@@ -4,18 +4,26 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import objektit.Pelilauta;
 
-class HiirenKuuntelija implements MouseListener {
+public class HiirenKuuntelija implements MouseListener {
 
     private Pelilauta pelilauta;
+    private Kayttolittyma kayttolittyma;
 
-    public HiirenKuuntelija(Pelilauta pelilauta) {
+    public HiirenKuuntelija(Pelilauta pelilauta, Kayttolittyma kayttolittyma) {
         this.pelilauta = pelilauta;
+        this.kayttolittyma = kayttolittyma;
     }
-
+    
     @Override
     public void mouseClicked(MouseEvent me) {
         int x = (me.getX() - 30)/30;
         int y = (me.getY() - 30)/30;
+        if(pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, y)){
+            if(pelilauta.pommita(x, y)){
+                System.out.println("Osuma!");
+            }
+        }
+        kayttolittyma.uudelleenPiirra();
     }
 
     @Override

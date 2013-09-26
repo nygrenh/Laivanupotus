@@ -10,7 +10,7 @@ public class Kayttolittyma implements Runnable{
 
     private JFrame frame;
     private Pelilauta pelilauta;
-      
+    
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
@@ -24,11 +24,15 @@ public class Kayttolittyma implements Runnable{
     private void luoKomponentit(Container container) {
         Piirtoalusta piirtoalusta = new Piirtoalusta(pelilauta);
         container.add(piirtoalusta);
-        piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta));
+        piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta, this));
     }
 
     public void setPelilauta(Pelilauta pelilauta) {
         this.pelilauta = pelilauta;
+    }
+
+    public void uudelleenPiirra() {
+        this.frame.repaint();
     }
     
 }

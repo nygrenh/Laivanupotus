@@ -52,6 +52,6 @@ public class PelilautaTest {
         assertFalse(lauta.asetaLaivaLaudalle(new Laiva(3, "Kumivene"), 1, 1, 1, 2));
     }
     
-    
+       
 }
 

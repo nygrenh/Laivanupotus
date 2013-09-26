@@ -52,13 +52,14 @@ public class Pelilauta {
         for(int x=alkuX; alkuX<=loppuX;x++){
             for(int y=alkuY; alkuY<=loppuY;y++){
                 ruudut.add(this.ruudut[x][y]);
+                this.ruudut[x][y].asetaruutuunLaiva(laiva);
             }
         }
         laiva.asetaRuudut(ruudut);
         return true;
     }
 
-    private boolean koordinaatitOnPelilaudanRajojenSisalla(int x, int y) {
+    public boolean koordinaatitOnPelilaudanRajojenSisalla(int x, int y) {
         return x>=0 && y>=0 && x<ruudut.length && y<ruudut[0].length;
     }
 }

@@ -19,4 +19,11 @@ public class Ruutu {
     public void pommita(){
         onPommitettu = true;
     }
+    public boolean ruudussaOnLaiva(){
+        return laiva == null;
+    }
+    
+    public void asetaruutuunLaiva(Laiva laiva){
+        this.laiva = laiva;
+    }
 }
