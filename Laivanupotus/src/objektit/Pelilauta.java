@@ -2,6 +2,9 @@ package objektit;
 
 import java.util.ArrayList;
 
+/**
+ * Pelilauta pitää sisältää pelilautaan kuuluvat ruudut ja tarjoaa niihin liittyviä funktioita
+ */
 public class Pelilauta {
     private Ruutu[][] ruudut;
     private boolean[][] pommitetutruudut; 

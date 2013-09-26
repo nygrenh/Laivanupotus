@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import objektit.Pelilauta;
 
+/**
+ * Vastuussa ikkunan luomisesta ja sen komponenttien luomisesta
+ */
 public class Kayttolittyma implements Runnable{
 
     private JFrame frame;

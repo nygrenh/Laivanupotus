@@ -5,6 +5,9 @@ import objektit.Laiva;
 import objektit.Pelilauta;
 import kayttoliittyma.Kayttolittyma;
 
+/**
+ * Huolehtii pelaajan toiminnasta
+ */
 public class Pelaaja {
     private Pelilauta pelilauta, vastustajanPelilauta;
     private Collection<Laiva> laivat;

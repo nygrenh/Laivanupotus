@@ -4,6 +4,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import objektit.Pelilauta;
 
+/**
+ * Kuuntelee hiiren klikkauksia ja reagoi niihin
+ */
 public class HiirenKuuntelija implements MouseListener {
 
     private Pelilauta pelilauta;

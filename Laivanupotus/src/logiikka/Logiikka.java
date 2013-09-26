@@ -6,6 +6,9 @@ import objektit.Laiva;
 import toimijat.Pelaaja;
 import kayttoliittyma.Kayttolittyma;
 
+/**
+ * Huolehtii pelin kulusta
+ */
 public class Logiikka {
     private Pelaaja pelaaja, pelaaja2;
     

@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import objektit.Pelilauta;
 
+/**
+ * Vastaa yhden pelilaudan piirtämisestä
+ */
 public class PelilaudanPiirtoalusta extends JPanel{
     
     private int x, y;

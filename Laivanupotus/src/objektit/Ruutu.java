@@ -1,5 +1,8 @@
 package objektit;
 
+/**
+ * Huolehtii yhteen ruutuun liityvän datan talletuksesta
+ */
 public class Ruutu {
     private Laiva laiva;
     private boolean onPommitettu;

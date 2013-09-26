@@ -2,6 +2,9 @@ package objektit;
 
 import java.util.List;
 
+/**
+ * Huolehtii laivoihin liittyvien tietojen talletuksesta
+ */
 public class Laiva {
     private List<Ruutu> ruudut;
     private int pituus;
