@@ -1,4 +1,3 @@
-
 package kayttoliittyma;
 
 import java.awt.Container;
@@ -11,8 +10,7 @@ public class Kayttolittyma implements Runnable{
 
     private JFrame frame;
     private Pelilauta pelilauta;
-    
-    
+      
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
@@ -24,7 +22,9 @@ public class Kayttolittyma implements Runnable{
     }
 
     private void luoKomponentit(Container container) {
-        container.add(new Piirtoalusta(pelilauta));
+        Piirtoalusta piirtoalusta = new Piirtoalusta(pelilauta);
+        container.add(piirtoalusta);
+        piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta));
     }
 
     public void setPelilauta(Pelilauta pelilauta) {
