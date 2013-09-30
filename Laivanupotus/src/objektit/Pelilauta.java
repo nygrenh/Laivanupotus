@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class Pelilauta {
     private Ruutu[][] ruudut;
     private boolean[][] pommitetutruudut; 
+    private boolean[][] varatutRuudut;
     
     public Pelilauta(int koko){
         ruudut = new Ruutu[koko][koko];
         pommitetutruudut = new boolean[koko][koko];
+        varatutRuudut = new boolean[koko][koko];
         for(int i=0; i<ruudut.length; i++){
             for(int j=0; j<ruudut[0].length; j++){
                 ruudut[i][j] = new Ruutu();
@@ -67,11 +69,15 @@ public class Pelilauta {
         if(!koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY) || !koordinaatitOnPelilaudanRajojenSisalla(loppuX, loppuY)){
             return false;
         }
+        if(laivaMeneeLiianLahelleMuitaLaivoija(alkuX, alkuY, loppuX, loppuY)){
+            return false;
+        }
         ArrayList<Ruutu> ruudut = new ArrayList<>();
         for(int x=alkuX; x<=loppuX;x++){
             for(int y=alkuY; y<=loppuY;y++){
                 ruudut.add(this.ruudut[x][y]);
                 this.ruudut[x][y].asetaruutuunLaiva(laiva);
+                varaaLahistonRuudut(x, y);
             }
         }
         laiva.asetaRuudut(ruudut);
@@ -81,4 +87,35 @@ public class Pelilauta {
     public boolean koordinaatitOnPelilaudanRajojenSisalla(int x, int y) {
         return x>=0 && y>=0 && x<ruudut.length && y<ruudut[0].length;
     }
+
+    private boolean laivaMeneeLiianLahelleMuitaLaivoija(int alkuX, int alkuY, int loppuX, int loppuY) {
+        for(int x=alkuX; x<=loppuX;x++){
+            for(int y=alkuY; y<=loppuY;y++){
+                if(this.varatutRuudut[x][y]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Tämä merkkaa annettujen koordinaattien ruudun sen välittömän ympäristön varatuksi. Tämä tehdään, koska laivanupotuksessa
+     * laivoja ei saa sijoittaa vierekkäin
+     * @param x
+     * @param y 
+     */
+    private void varaaLahistonRuudut(int x, int y) {
+            this.varatutRuudut[x][y] = true;
+            if(x<varatutRuudut.length-1)
+                this.varatutRuudut[x+1][y] = true;
+            if(y<varatutRuudut[0].length-1)
+                this.varatutRuudut[x][y+1] = true;
+            if(x>0)
+                this.varatutRuudut[x-1][y] = true;
+            if(y>0)
+                this.varatutRuudut[x][y-1] = true;
+    }
+
+
 }

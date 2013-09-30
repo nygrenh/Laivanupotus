@@ -43,12 +43,24 @@ public class PelilaudanPiirtoalusta extends JPanel{
         int ruudunXKoordinaatti = x/30;
         int ruudunYKoordinaatti = y/30;
         if(pelilauta.ruutuaOnJoPommitettu(ruudunXKoordinaatti, ruudunYKoordinaatti)){
-            if(pelilauta.getRuutu(ruudunXKoordinaatti, ruudunYKoordinaatti).getLaiva() != null){
-                g.setColor(Color.yellow);
+            if(ruudussaOnLaiva(ruudunXKoordinaatti, ruudunYKoordinaatti)){
+                if(ruudussaOlevaLaivaOnTuhottu(ruudunXKoordinaatti, ruudunYKoordinaatti)){
+                    g.setColor(Color.green);
+                }else{
+                    g.setColor(Color.yellow);
+                }
             } else{
                 g.setColor(Color.RED);
             }
             g.fillRect(x, y, 29, 29);
         }
+    }
+
+    private boolean ruudussaOnLaiva(int ruudunXKoordinaatti, int ruudunYKoordinaatti) {
+        return pelilauta.getRuutu(ruudunXKoordinaatti, ruudunYKoordinaatti).getLaiva() != null;
+    }
+
+    private boolean ruudussaOlevaLaivaOnTuhottu(int ruudunXKoordinaatti, int ruudunYKoordinaatti) {
+        return pelilauta.getRuutu(ruudunXKoordinaatti, ruudunYKoordinaatti).getLaiva().onTuhottu();
     }
 }
