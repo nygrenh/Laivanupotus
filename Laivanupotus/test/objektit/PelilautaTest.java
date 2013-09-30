@@ -43,18 +43,14 @@ public class PelilautaTest {
     
     @Test
     public void asetaLaivaLaudallePalauttaaFalseJosYritetaanAsettaaLaivaaLaudanUlkopuolelle(){
-        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 55, 55, 56, 55));
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 55, 55, true));
+        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 55, 55, false));
     }
-    
-    @Test
-    public void asetaLaivaLaudallePalauttaaFalseJosLaivanPituusOnVaara(){
-        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(1, "Kumivene"), 1, 1, 1, 2));
-        assertFalse(lauta.asetaLaivaLaudalle(new Laiva(3, "Kumivene"), 1, 1, 1, 2));
-    }
-    
+      
     @Test
     public void asetaLaivaLaudallePalauttaaTrueJosLaivaOnnistuttiinSijoittamaanLaudalle(){
-        assertTrue(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 1, 1, 1, 2));
+        assertTrue(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 1, 1, true));
+        assertTrue(lauta.asetaLaivaLaudalle(new Laiva(2, "Kumivene"), 4, 4, false));
     }       
 }
 
