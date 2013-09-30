@@ -61,9 +61,9 @@ public class Pelilauta {
         int loppuX, loppuY;
         if(meneeAlaspain){
             loppuX = alkuX;
-            loppuY = alkuY + laiva.getPituus();
+            loppuY = alkuY + laiva.getPituus() -1;
         } else {
-            loppuX = alkuX + laiva.getPituus();
+            loppuX = alkuX + laiva.getPituus() -1;
             loppuY = alkuY;
         }
         if(!koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY) || !koordinaatitOnPelilaudanRajojenSisalla(loppuX, loppuY)){
