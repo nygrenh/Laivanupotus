@@ -17,7 +17,6 @@ public class Pelilauta {
                 ruudut[i][j] = new Ruutu();
             }
         }
-        asetaLaivaLaudalle(new Laiva(3, "Kumivene"), 4, 5, true);
     }
     
     public Ruutu getRuutu(int x, int y){

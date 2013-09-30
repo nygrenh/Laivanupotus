@@ -17,6 +17,7 @@ public class Logiikka {
         pelaaja2 = new Pelaaja();
         Collection<Laiva> pelaajanLaivat = luoUusiLaivasto();
         Collection<Laiva> pelaaja2nLaivat = luoUusiLaivasto();
+        pelaaja.sijoitaLaivatLaudalle(pelaaja2nLaivat);
     }
     public void silmukka(){
         
@@ -34,6 +35,7 @@ public class Logiikka {
     private void lisaaLaiva(Collection<Laiva> palautettava, int lukumaara, String nimi, int pituus) {
         for(int i = 0; i < lukumaara; i++){
             Laiva lisattavaLaiva = new Laiva(pituus, nimi);
+            palautettava.add(lisattavaLaiva);
         }
     }
     
