@@ -31,6 +31,7 @@ public class PelilaudanPiirtoalusta extends JPanel{
                 piirraObjektit(g, x, y);
             }
         }
+        g.translate(-this.x, -this.y);
     }
 
     private void piirraRuudukko(Graphics g, int x, int y) {

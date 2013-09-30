@@ -14,11 +14,12 @@ public class Pelaaja {
     
     public Pelaaja(Kayttolittyma kayttolittyma){
         this();
-        kayttolittyma.setPelilauta(pelilauta);     
+        kayttolittyma.setPelilautat(pelilauta, vastustajanPelilauta);     
     }
     
     public Pelaaja(){
         this.pelilauta = new Pelilauta(10);
+        this.vastustajanPelilauta = new Pelilauta(10);
     }
     
     public void sijoitaLaivatLaudalle(Collection<Laiva> laivat){

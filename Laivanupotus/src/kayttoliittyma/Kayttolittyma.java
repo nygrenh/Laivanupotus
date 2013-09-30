@@ -12,7 +12,7 @@ import objektit.Pelilauta;
 public class Kayttolittyma implements Runnable{
 
     private JFrame frame;
-    private Pelilauta pelilauta;
+    private Pelilauta pelilauta, pelilauta2;
     
     @Override
     public void run() {
@@ -25,13 +25,14 @@ public class Kayttolittyma implements Runnable{
     }
 
     private void luoKomponentit(Container container) {
-        Piirtoalusta piirtoalusta = new Piirtoalusta(pelilauta);
+        Piirtoalusta piirtoalusta = new Piirtoalusta(pelilauta, pelilauta2);
         container.add(piirtoalusta);
         piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta, this));
     }
 
-    public void setPelilauta(Pelilauta pelilauta) {
+    public void setPelilautat(Pelilauta pelilauta, Pelilauta pelilauta2) {
         this.pelilauta = pelilauta;
+        this.pelilauta2 = pelilauta2;
     }
 
     public void uudelleenPiirra() {
