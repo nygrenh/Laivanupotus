@@ -27,7 +27,7 @@ public class Kayttolittyma implements Runnable{
     private void luoKomponentit(Container container) {
         Piirtoalusta piirtoalusta = new Piirtoalusta(pelilauta, pelilauta2);
         container.add(piirtoalusta);
-        piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta, this));
+        piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta, pelilauta2, this));
     }
 
     public void setPelilautat(Pelilauta pelilauta, Pelilauta pelilauta2) {

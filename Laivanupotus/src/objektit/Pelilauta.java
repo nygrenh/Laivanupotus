@@ -9,6 +9,7 @@ public class Pelilauta {
     private Ruutu[][] ruudut;
     private boolean[][] pommitetutruudut; 
     private boolean[][] varatutRuudut;
+    private boolean laivatOnNakyvilla;
     
     public Pelilauta(int koko){
         ruudut = new Ruutu[koko][koko];
@@ -19,6 +20,7 @@ public class Pelilauta {
                 ruudut[i][j] = new Ruutu();
             }
         }
+        laivatOnNakyvilla = false;
     }
     
     public Ruutu getRuutu(int x, int y){
@@ -118,5 +120,15 @@ public class Pelilauta {
                 this.varatutRuudut[x][y-1] = true;
     }
 
+    public Laiva annaAsetettavaLaiva() {
+        return new Laiva(2, "Kumivene");
+    }
 
+    public boolean laivatOnNakyvilla(){
+        return laivatOnNakyvilla;
+    }
+    
+    public void vaihdaLaivoijenNakyvyytta(){
+        laivatOnNakyvilla = !laivatOnNakyvilla;
+    }
 }

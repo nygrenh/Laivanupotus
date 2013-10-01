@@ -21,6 +21,7 @@ public class Pelaaja {
     public Pelaaja(){
         this.pelilauta = new Pelilauta(10);
         this.vastustajanPelilauta = new Pelilauta(10);
+        vastustajanPelilauta.vaihdaLaivoijenNakyvyytta();
     }
     /**
      * Tämä metodi on toistaiseksi ihan väärässä luokassa
