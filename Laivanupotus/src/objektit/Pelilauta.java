@@ -39,6 +39,7 @@ public class Pelilauta {
      */
     public boolean pommita(int x, int y){
         pommitetutruudut[x][y] = true;
+        ruudut[x][y].pommita();
         Laiva laiva = ruudut[x][y].getLaiva();
         if(laiva == null){
             return false;
