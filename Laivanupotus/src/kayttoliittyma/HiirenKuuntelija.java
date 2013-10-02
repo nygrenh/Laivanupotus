@@ -16,6 +16,7 @@ public class HiirenKuuntelija implements MouseListener {
     private Boolean laivojenAsetteluOnKaynnissa;
     private Boolean asetettavaLaivaMeneeAlaspain;
     private Logiikka logiikka;
+    private int mousePressedX, mousepressedY;
 
     public HiirenKuuntelija(Pelilauta pelilauta, Pelilauta pelilauta2, Kayttolittyma kayttolittyma, Logiikka logiikka) {
         this.pelilauta = pelilauta;
@@ -37,12 +38,22 @@ public class HiirenKuuntelija implements MouseListener {
         kayttolittyma.uudelleenPiirra();
     }
 
+    /**
+     * Tätä metodia käytetään auttamaan tapauksessa, jossa käyttäjä on aikonut klikata ruutua, mutta vahingossa liikuttanut
+     * hiirtään samalla
+     * @param me 
+     */
     @Override
     public void mousePressed(MouseEvent me) {
+        mousePressedX = me.getX();
+        mousepressedY = me.getY();
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
+        if(hiiriEiOleLiikkunutPaljon(me)){
+            mouseClicked(me);
+        }
     }
 
     @Override
@@ -80,6 +91,12 @@ public class HiirenKuuntelija implements MouseListener {
             this.laivojenAsetteluOnKaynnissa = false;
         }
 
+    }
+
+    private boolean hiiriEiOleLiikkunutPaljon(MouseEvent me) {
+        boolean hiiriEiOleLiikkunutPaljon = Math.abs(mousePressedX-me.getX())<3 && Math.abs(mousepressedY-me.getY())<3;
+        boolean hiiriOnYhaSamassaRuudussa = mousePressedX/30==me.getX()/30 && mousepressedY/30==me.getY()/30;
+        return hiiriEiOleLiikkunutPaljon && hiiriOnYhaSamassaRuudussa;
     }
     
 }
