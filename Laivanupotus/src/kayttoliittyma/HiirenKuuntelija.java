@@ -2,6 +2,7 @@ package kayttoliittyma;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import logiikka.Logiikka;
 import objektit.Laiva;
 import objektit.Pelilauta;
 
@@ -14,13 +15,15 @@ public class HiirenKuuntelija implements MouseListener {
     private Kayttolittyma kayttolittyma;
     private Boolean laivojenAsetteluOnKaynnissa;
     private Boolean asetettavaLaivaMeneeAlaspain;
+    private Logiikka logiikka;
 
-    public HiirenKuuntelija(Pelilauta pelilauta, Pelilauta pelilauta2, Kayttolittyma kayttolittyma) {
+    public HiirenKuuntelija(Pelilauta pelilauta, Pelilauta pelilauta2, Kayttolittyma kayttolittyma, Logiikka logiikka) {
         this.pelilauta = pelilauta;
         this.pelilauta2 = pelilauta2;
         this.kayttolittyma = kayttolittyma;
-        laivojenAsetteluOnKaynnissa = false;
+        laivojenAsetteluOnKaynnissa = true;
         asetettavaLaivaMeneeAlaspain = true;
+        this.logiikka = logiikka;
     }
     
     @Override
@@ -70,8 +73,13 @@ public class HiirenKuuntelija implements MouseListener {
         me.translatePoint(-360, -30);
         int x = me.getX()/30;
         int y = me.getY()/30;
-        Laiva asetettavaLaiva = pelilauta2.annaAsetettavaLaiva();
-        pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, asetettavaLaivaMeneeAlaspain);
+        Laiva asetettavaLaiva = logiikka.annaAsetettavaLaiva();
+        if(asetettavaLaiva!=null){
+            pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, asetettavaLaivaMeneeAlaspain); 
+        } else{
+            this.laivojenAsetteluOnKaynnissa = false;
+        }
+
     }
     
 }

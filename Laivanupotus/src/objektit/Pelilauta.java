@@ -120,9 +120,7 @@ public class Pelilauta {
                 this.varatutRuudut[x][y-1] = true;
     }
 
-    public Laiva annaAsetettavaLaiva() {
-        return new Laiva(2, "Kumivene");
-    }
+
 
     public boolean laivatOnNakyvilla(){
         return laivatOnNakyvilla;

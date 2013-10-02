@@ -2,6 +2,7 @@ package logiikka;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import objektit.Laiva;
 import toimijat.Pelaaja;
 import kayttoliittyma.Kayttolittyma;
@@ -11,11 +12,12 @@ import kayttoliittyma.Kayttolittyma;
  */
 public class Logiikka {
     private Pelaaja pelaaja, pelaaja2;
+    private Collection<Laiva> pelaajanLaivat;
     
     public Logiikka(Kayttolittyma kayttolittyma){
         pelaaja = new Pelaaja(kayttolittyma);
         pelaaja2 = new Pelaaja();
-        Collection<Laiva> pelaajanLaivat = luoUusiLaivasto();
+        pelaajanLaivat = luoUusiLaivasto();
         Collection<Laiva> pelaaja2nLaivat = luoUusiLaivasto();
         pelaaja.sijoitaLaivatLaudalle(pelaaja2nLaivat);
     }
@@ -39,9 +41,20 @@ public class Logiikka {
         }
     }
     
+    public Laiva annaAsetettavaLaiva() {
+        for(Laiva laiva : pelaajanLaivat){
+            if(laiva.onSijoitettu()){
+                continue;
+            }
+            return laiva;
+        }
+        return null;
+    }
+    
     public static void main(String [] args){
         Kayttolittyma kayttolittyma = new Kayttolittyma();
-        new Logiikka(kayttolittyma);
+        Logiikka logiikka = new Logiikka(kayttolittyma);
+        kayttolittyma.setLogiikka(logiikka);
         kayttolittyma.run();
     }
 }

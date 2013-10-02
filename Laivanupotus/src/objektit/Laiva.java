@@ -35,4 +35,15 @@ public class Laiva {
         return pituus;
     }
     
+    public Boolean onSijoitettu(){
+        return this.ruudut != null;
+    }
+
+    @Override
+    public String toString() {
+        return this.nimi;
+    }
+    
+    
+    
 }
