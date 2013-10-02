@@ -16,7 +16,7 @@ public class HiirenKuuntelija implements MouseListener {
     private Boolean laivojenAsetteluOnKaynnissa;
     private Boolean asetettavaLaivaMeneeAlaspain;
     private Logiikka logiikka;
-    private int mousePressedX, mousepressedY;
+    private int hiirtaPainettuX, hiirtaPainettuY;
 
     public HiirenKuuntelija(Pelilauta pelilauta, Pelilauta pelilauta2, Kayttolittyma kayttolittyma, Logiikka logiikka) {
         this.pelilauta = pelilauta;
@@ -45,13 +45,13 @@ public class HiirenKuuntelija implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent me) {
-        mousePressedX = me.getX();
-        mousepressedY = me.getY();
+        hiirtaPainettuX = me.getX();
+        hiirtaPainettuY = me.getY();
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        if(hiiriEiOleLiikkunutPaljon(me)){
+        if(hiirtaEiOleKlikattu(me) && hiiriEiOleLiikkunutPaljon(me)){
             mouseClicked(me);
         }
     }
@@ -94,9 +94,13 @@ public class HiirenKuuntelija implements MouseListener {
     }
 
     private boolean hiiriEiOleLiikkunutPaljon(MouseEvent me) {
-        boolean hiiriEiOleLiikkunutPaljon = Math.abs(mousePressedX-me.getX())<3 && Math.abs(mousepressedY-me.getY())<3;
-        boolean hiiriOnYhaSamassaRuudussa = mousePressedX/30==me.getX()/30 && mousepressedY/30==me.getY()/30;
+        boolean hiiriEiOleLiikkunutPaljon = Math.abs(hiirtaPainettuX-me.getX())<3 && Math.abs(hiirtaPainettuY-me.getY())<3;
+        boolean hiiriOnYhaSamassaRuudussa = hiirtaPainettuX/30==me.getX()/30 && hiirtaPainettuY/30==me.getY()/30;
         return hiiriEiOleLiikkunutPaljon && hiiriOnYhaSamassaRuudussa;
     }
-    
+
+    private boolean hiirtaEiOleKlikattu(MouseEvent me) {
+        return hiirtaPainettuX != me.getX() && hiirtaPainettuY != me.getY();
+    }
+   
 }
