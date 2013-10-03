@@ -65,6 +65,9 @@ public class HiirenKuuntelija implements MouseListener {
 
     private void pommita(MouseEvent me) {
         me.translatePoint(-30, -30);
+        if (me.getX() < 0 || me.getY() < 0) {
+            return;
+        }
         int x = me.getX() / 30;
         int y = me.getY() / 30;
         if (pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, y)) {
