@@ -3,6 +3,7 @@ package kayttoliittyma;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import logiikka.Logiikka;
+import logiikka.Pelinvaihe;
 import objektit.Laiva;
 import objektit.Pelilauta;
 
@@ -13,7 +14,6 @@ public class HiirenKuuntelija implements MouseListener {
 
     private Pelilauta pelilauta, pelilauta2;
     private Kayttolittyma kayttolittyma;
-    private Boolean laivojenAsetteluOnKaynnissa;
     private Boolean asetettavaLaivaMeneeAlaspain;
     private Logiikka logiikka;
     private int hiirtaPainettuX, hiirtaPainettuY;
@@ -22,20 +22,18 @@ public class HiirenKuuntelija implements MouseListener {
         this.pelilauta = pelilauta;
         this.pelilauta2 = pelilauta2;
         this.kayttolittyma = kayttolittyma;
-        laivojenAsetteluOnKaynnissa = true;
         asetettavaLaivaMeneeAlaspain = true;
         this.logiikka = logiikka;
     }
     
     @Override
     public void mouseClicked(MouseEvent me) {
-        if(!laivojenAsetteluOnKaynnissa){
+        if(logiikka.getPelinvaihe()== Pelinvaihe.PELAAJA1NVUORO){
             pommita(me);
-        } else{
+        }
+        if(logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJENSIJOITTELU){
             asetaLaiva(me);
         }
-        
-        kayttolittyma.uudelleenPiirra();
     }
 
     /**
@@ -87,10 +85,7 @@ public class HiirenKuuntelija implements MouseListener {
         Laiva asetettavaLaiva = logiikka.annaAsetettavaLaiva();
         if(asetettavaLaiva!=null){
             pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, asetettavaLaivaMeneeAlaspain); 
-        } else{
-            this.laivojenAsetteluOnKaynnissa = false;
         }
-
     }
 
     private boolean hiiriEiOleLiikkunutPaljon(MouseEvent me) {

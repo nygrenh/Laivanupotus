@@ -12,14 +12,12 @@ import objektit.Pelilauta;
  */
 public class Piirtoalusta extends JPanel {
 private Pelilauta pelilauta, vastustajanPelilauta;
-private char[] viesti;
 private Logiikka logiikka;
 
     public Piirtoalusta(Pelilauta pelilauta, Pelilauta vastustajanPelilauta, Logiikka logiikka) {
         super.setBackground(Color.WHITE);
         this.pelilauta = pelilauta;
         this.vastustajanPelilauta = vastustajanPelilauta;
-        viesti ="Hello".toCharArray();
         this.logiikka = logiikka;
     }
 
@@ -33,17 +31,9 @@ private Logiikka logiikka;
         pelilaudanPiirtoalusta2.paintComponent(graphics);      
     }
     
-    public void asetaViesti(String viesti){
-        this.viesti = viesti.toCharArray();
-    }
 
     private void paivitaViesti(Graphics graphics) {
-        Laiva laiva = logiikka.annaAsetettavaLaiva();
-        if(laiva != null){
-            asetaViesti("Aseta " + laiva.toString().toLowerCase() + " oikeanpuoleiseen pelilautaan. Hiiren rullan painaminen kääntää laivan suuntaa.");
-        } else{
-            asetaViesti("Pommita vasemmanpuoleista pelilautaa");
-        }
+        char[] viesti = logiikka.getViesti().toCharArray();
         graphics.drawChars(viesti, 0, viesti.length, 15, 15);
     }
 }
