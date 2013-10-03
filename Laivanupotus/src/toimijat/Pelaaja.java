@@ -7,7 +7,8 @@ import objektit.Pelilauta;
 import kayttoliittyma.Kayttolittyma;
 
 /**
- * Huolehtii pelaajan toiminnasta
+ * Huolehtii pelaajan toiminnasta. Todennäköisesti tulen refaktoroimaan
+ * suurimman osan tästä luokasta pois.
  */
 public class Pelaaja {
 

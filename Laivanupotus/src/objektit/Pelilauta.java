@@ -96,6 +96,13 @@ public class Pelilauta {
         return true;
     }
 
+    /**
+     *
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @return Palauttaa true, jos koordinaatit osuvat pelilaudalle, muuten
+     * false
+     */
     public boolean koordinaatitOnPelilaudanRajojenSisalla(int x, int y) {
         return x >= 0 && y >= 0 && x < ruudut.length && y < ruudut[0].length;
     }
@@ -116,8 +123,8 @@ public class Pelilauta {
      * varatuksi. Tämä tehdään, koska laivanupotuksessa laivoja ei saa sijoittaa
      * vierekkäin
      *
-     * @param x
-     * @param y
+     * @param x Lähtöruudun x-koordinaatti
+     * @param y Lähtöruudun y-koordinaatti
      */
     private void varaaLahistonRuudut(int x, int y) {
         this.varatutRuudut[x][y] = true;

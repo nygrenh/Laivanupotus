@@ -127,7 +127,7 @@ public class Logiikka {
         this.edellinenSilmukka = aikaNyt;
     }
 
-    private void vaihdaVuoro() {
+    public void vaihdaVuoro() {
         if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU || pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
             pelinvaihe = Pelinvaihe.PELAAJA1NVUORO;
         } else {

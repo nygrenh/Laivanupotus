@@ -75,6 +75,12 @@ public class HiirenKuuntelija implements MouseListener {
         }
     }
 
+    /**
+     * Asettaa laivan pelilaudalle. Tämä ominaisuus tullaan ulkoistamaan
+     * logiikalle, jotta tämä luokka voi keskittyä hiiren kuunteluun
+     *
+     * @param me
+     */
     private void asetaLaiva(MouseEvent me) {
         if (me.getButton() == MouseEvent.BUTTON2) {
             asetettavaLaivaMeneeAlaspain = !asetettavaLaivaMeneeAlaspain;

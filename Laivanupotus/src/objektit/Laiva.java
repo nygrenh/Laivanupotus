@@ -11,11 +11,21 @@ public class Laiva {
     private int pituus;
     private String nimi;
 
+    /**
+     * @param pituus Laivan pituus
+     * @param nimi Laivan nimi
+     */
     public Laiva(int pituus, String nimi) {
         this.pituus = pituus;
         this.nimi = nimi;
     }
 
+    /**
+     * Tämä metodi kertoo, onko tämä laiva jo tuhottu
+     *
+     * @return Palauttaa true, jos laiva on tuhottu, ja false jos laivaa ei ole
+     * tuhottu
+     */
     public boolean onTuhottu() {
         if (this.ruudut == null) {
             return false;
@@ -32,6 +42,11 @@ public class Laiva {
         return false;
     }
 
+    /**
+     * Tällä metodilla kerrotaan laivalle, missä ruuduissa se sijaitsee
+     *
+     * @param ruudut
+     */
     public void asetaRuudut(List<Ruutu> ruudut) {
         this.ruudut = ruudut;
     }

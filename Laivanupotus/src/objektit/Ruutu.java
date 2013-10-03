@@ -8,6 +8,9 @@ public class Ruutu {
     private Laiva laiva;
     private boolean onPommitettu;
 
+    /**
+     * Alustaa pommittamattoman ruudun ilman laivaa
+     */
     public Ruutu() {
         laiva = null;
         onPommitettu = false;
@@ -21,6 +24,9 @@ public class Ruutu {
         return onPommitettu;
     }
 
+    /**
+     * Muuttaa ruudun pommitetuksi ruuduksi
+     */
     public void pommita() {
         onPommitettu = true;
     }
