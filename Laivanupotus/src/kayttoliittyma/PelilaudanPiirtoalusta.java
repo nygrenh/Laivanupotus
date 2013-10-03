@@ -42,17 +42,19 @@ public class PelilaudanPiirtoalusta extends JPanel{
     private void piirraObjektit(Graphics g, int x, int y) {
         int ruudunXKoordinaatti = x/30;
         int ruudunYKoordinaatti = y/30;
-        if(pelilauta.laivatOnNakyvilla() || pelilauta.ruutuaOnJoPommitettu(ruudunXKoordinaatti, ruudunYKoordinaatti)){
+        if(pelilauta.ruutuaOnJoPommitettu(ruudunXKoordinaatti, ruudunYKoordinaatti)){
             if(ruudussaOnLaiva(ruudunXKoordinaatti, ruudunYKoordinaatti)){
                 if(ruudussaOlevaLaivaOnTuhottu(ruudunXKoordinaatti, ruudunYKoordinaatti)){
                     g.setColor(Color.green);
                 }else{
                     g.setColor(Color.yellow);
                 }
-            } else if(!pelilauta.laivatOnNakyvilla()){
+            } else{
                 g.setColor(Color.RED);
             }
             g.fillRect(x, y, 29, 29);
+        } else if(pelilauta.laivatOnNakyvilla() && ruudussaOnLaiva(ruudunXKoordinaatti, ruudunYKoordinaatti)){
+            piirraNakymattomatLaivat(g, x, y);
         }
     }
 
@@ -63,4 +65,10 @@ public class PelilaudanPiirtoalusta extends JPanel{
     private boolean ruudussaOlevaLaivaOnTuhottu(int ruudunXKoordinaatti, int ruudunYKoordinaatti) {
         return pelilauta.getRuutu(ruudunXKoordinaatti, ruudunYKoordinaatti).getLaiva().onTuhottu();
     }
+
+    private void piirraNakymattomatLaivat(Graphics g, int ruudunXKoordinaatti, int ruudunYKoordinaatti) {
+        g.setColor(Color.GRAY);
+        g.fillRect(ruudunXKoordinaatti, ruudunYKoordinaatti, 29, 29);
+    }
+    
 }

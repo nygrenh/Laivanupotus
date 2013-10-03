@@ -68,9 +68,7 @@ public class HiirenKuuntelija implements MouseListener {
         int x = me.getX()/30;
         int y = me.getY()/30;
         if(pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, y)){
-            if(pelilauta.pommita(x, y)){
-                //
-            }
+            logiikka.pelaaja1nSiirto(x, y, pelilauta);
         }
     }
 

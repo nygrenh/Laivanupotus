@@ -39,4 +39,9 @@ public class Pelaaja {
             }while(!pelilauta.asetaLaivaLaudalle(laiva, lahtoKoordinaattiX, lahtoKoordinaattiY, suunta));
         }
     }
+
+    public Pelilauta getVastustajanPelilauta() {
+        return vastustajanPelilauta;
+    }
+    
 }

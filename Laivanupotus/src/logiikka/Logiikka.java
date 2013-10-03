@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import objektit.Laiva;
 import toimijat.Pelaaja;
 import kayttoliittyma.Kayttolittyma;
+import objektit.Pelilauta;
 
 /**
  * Huolehtii pelin kulusta
@@ -19,6 +20,7 @@ public class Logiikka {
     private Kayttolittyma kayttolittyma;
     private long edellinenSilmukka;
     private long fps;
+    private Tekoaly tekoaly;
     
     public Logiikka(Kayttolittyma kayttolittyma){
         pelaaja = new Pelaaja(kayttolittyma);
@@ -27,12 +29,17 @@ public class Logiikka {
         Collection<Laiva> pelaaja2nLaivat = luoUusiLaivasto();
         pelaaja.sijoitaLaivatLaudalle(pelaaja2nLaivat);
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
+        tekoaly = new Tekoaly(pelaaja.getVastustajanPelilauta());
     }
     public void silmukka(){
         edellinenSilmukka = System.currentTimeMillis();
         while(true){
             if(pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU && annaAsetettavaLaiva()==null){
-                pelinvaihe = Pelinvaihe.PELAAJA1NVUORO;
+                vaihdaVuoro();
+            }
+            if(pelinvaihe == Pelinvaihe.PELAAJA2NVUORO){
+                tekoaly.siirra();
+                vaihdaVuoro();
             }
             kayttolittyma.uudelleenPiirra();
             nuku();
@@ -113,6 +120,20 @@ public class Logiikka {
         fps = 1000 / (System.currentTimeMillis() - edellinenSilmukka);
         this.edellinenSilmukka = aikaNyt;
     }
-    
-    
+
+    private void vaihdaVuoro() {
+        if(pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU || pelinvaihe == Pelinvaihe.PELAAJA2NVUORO){
+                pelinvaihe = Pelinvaihe.PELAAJA1NVUORO;    
+        } else{
+            pelinvaihe = Pelinvaihe.PELAAJA2NVUORO;
+        }
+    }
+
+    public void pelaaja1nSiirto(int x, int y, Pelilauta pelilauta) {
+        if(!pelilauta.ruutuaOnJoPommitettu(x, y)){
+            pelilauta.pommita(x, y);
+            vaihdaVuoro();
+        }
+    }
+  
 }
