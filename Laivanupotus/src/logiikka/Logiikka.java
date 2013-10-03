@@ -2,7 +2,6 @@ package logiikka;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objektit.Laiva;
@@ -44,7 +43,7 @@ public class Logiikka {
                 vaihdaVuoro();
             }
             kayttolittyma.uudelleenPiirra();
-            nuku();
+            nuku(30);
         }
     }
 
@@ -106,20 +105,25 @@ public class Logiikka {
     }
 
     /**
-     * Yrittää nukkua täsmälleen sen verran, että silmukka pyörisi 60fps
+     * Nukkuu sopivan verran, jottei pelin pääsilmukka tulisi aivan hulluksi
+     *
+     * @param haluttuFPS Määrittää ihanteellisen kierrosmaaran sekunnissa
      */
-    private void nuku() {
+    private void nuku(int haluttuFPS) {
+        int ihanteellinenPaivitysaika = (int) (1.0 / haluttuFPS * 1000);
         long aikaNyt = System.currentTimeMillis();
         long ero = aikaNyt - edellinenSilmukka;
         try {
-            long nukuttavaika = (long) 16.67 - ero;
+            long nukuttavaika = (long) ihanteellinenPaivitysaika - ero;
             if (nukuttavaika > 0) {
                 Thread.sleep(nukuttavaika);
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(Logiikka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fps = 1000 / (System.currentTimeMillis() - edellinenSilmukka);
+        if ((System.currentTimeMillis() - edellinenSilmukka) != 0) {
+            fps = 1000 / (System.currentTimeMillis() - edellinenSilmukka);
+        }
         this.edellinenSilmukka = aikaNyt;
     }
 
