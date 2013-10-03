@@ -25,21 +25,22 @@ public class HiirenKuuntelija implements MouseListener {
         asetettavaLaivaMeneeAlaspain = true;
         this.logiikka = logiikka;
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent me) {
-        if(logiikka.getPelinvaihe()== Pelinvaihe.PELAAJA1NVUORO){
+        if (logiikka.getPelinvaihe() == Pelinvaihe.PELAAJA1NVUORO) {
             pommita(me);
         }
-        if(logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJENSIJOITTELU){
+        if (logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJENSIJOITTELU) {
             asetaLaiva(me);
         }
     }
 
     /**
-     * Tätä metodia käytetään auttamaan tapauksessa, jossa käyttäjä on aikonut klikata ruutua, mutta vahingossa liikuttanut
-     * hiirtään samalla
-     * @param me 
+     * Tätä metodia käytetään auttamaan tapauksessa, jossa käyttäjä on aikonut
+     * klikata ruutua, mutta vahingossa liikuttanut hiirtään samalla
+     *
+     * @param me
      */
     @Override
     public void mousePressed(MouseEvent me) {
@@ -49,7 +50,7 @@ public class HiirenKuuntelija implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        if(hiirtaEiOleKlikattu(me) && hiiriEiOleLiikkunutPaljon(me)){
+        if (hiirtaEiOleKlikattu(me) && hiiriEiOleLiikkunutPaljon(me)) {
             mouseClicked(me);
         }
     }
@@ -61,39 +62,37 @@ public class HiirenKuuntelija implements MouseListener {
     @Override
     public void mouseExited(MouseEvent me) {
     }
-    
 
     private void pommita(MouseEvent me) {
         me.translatePoint(-30, -30);
-        int x = me.getX()/30;
-        int y = me.getY()/30;
-        if(pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, y)){
+        int x = me.getX() / 30;
+        int y = me.getY() / 30;
+        if (pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, y)) {
             logiikka.pelaaja1nSiirto(x, y, pelilauta);
         }
     }
 
     private void asetaLaiva(MouseEvent me) {
-        if(me.getButton()==MouseEvent.BUTTON2){
+        if (me.getButton() == MouseEvent.BUTTON2) {
             asetettavaLaivaMeneeAlaspain = !asetettavaLaivaMeneeAlaspain;
             return;
         }
         me.translatePoint(-360, -30);
-        int x = me.getX()/30;
-        int y = me.getY()/30;
+        int x = me.getX() / 30;
+        int y = me.getY() / 30;
         Laiva asetettavaLaiva = logiikka.annaAsetettavaLaiva();
-        if(asetettavaLaiva!=null){
-            pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, asetettavaLaivaMeneeAlaspain); 
+        if (asetettavaLaiva != null) {
+            pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, asetettavaLaivaMeneeAlaspain);
         }
     }
 
     private boolean hiiriEiOleLiikkunutPaljon(MouseEvent me) {
-        boolean hiiriEiOleLiikkunutPaljon = Math.abs(hiirtaPainettuX-me.getX())<3 && Math.abs(hiirtaPainettuY-me.getY())<3;
-        boolean hiiriOnYhaSamassaRuudussa = hiirtaPainettuX/30==me.getX()/30 && hiirtaPainettuY/30==me.getY()/30;
+        boolean hiiriEiOleLiikkunutPaljon = Math.abs(hiirtaPainettuX - me.getX()) < 3 && Math.abs(hiirtaPainettuY - me.getY()) < 3;
+        boolean hiiriOnYhaSamassaRuudussa = hiirtaPainettuX / 30 == me.getX() / 30 && hiirtaPainettuY / 30 == me.getY() / 30;
         return hiiriEiOleLiikkunutPaljon && hiiriOnYhaSamassaRuudussa;
     }
 
     private boolean hiirtaEiOleKlikattu(MouseEvent me) {
         return hiirtaPainettuX != me.getX() && hiirtaPainettuY != me.getY();
     }
-   
 }

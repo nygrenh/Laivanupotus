@@ -10,38 +10,40 @@ import kayttoliittyma.Kayttolittyma;
  * Huolehtii pelaajan toiminnasta
  */
 public class Pelaaja {
+
     private Pelilauta pelilauta, vastustajanPelilauta;
     private Collection<Laiva> laivat;
-    
-    public Pelaaja(Kayttolittyma kayttolittyma){
+
+    public Pelaaja(Kayttolittyma kayttolittyma) {
         this();
-        kayttolittyma.setPelilautat(pelilauta, vastustajanPelilauta);     
+        kayttolittyma.setPelilautat(pelilauta, vastustajanPelilauta);
     }
-    
-    public Pelaaja(){
+
+    public Pelaaja() {
         this.pelilauta = new Pelilauta(10);
         this.vastustajanPelilauta = new Pelilauta(10);
         vastustajanPelilauta.vaihdaLaivoijenNakyvyytta();
     }
+
     /**
      * Tämä metodi on toistaiseksi ihan väärässä luokassa
-     * @param laivat 
+     *
+     * @param laivat
      */
-    public void sijoitaLaivatLaudalle(Collection<Laiva> laivat){
+    public void sijoitaLaivatLaudalle(Collection<Laiva> laivat) {
         Random random = new Random();
-        for(Laiva laiva : laivat){
+        for (Laiva laiva : laivat) {
             int lahtoKoordinaattiX, lahtoKoordinaattiY;
             Boolean suunta;
-            do{
+            do {
                 lahtoKoordinaattiX = random.nextInt(pelilauta.getKoko());
                 lahtoKoordinaattiY = random.nextInt(pelilauta.getKoko());
                 suunta = random.nextBoolean();
-            }while(!pelilauta.asetaLaivaLaudalle(laiva, lahtoKoordinaattiX, lahtoKoordinaattiY, suunta));
+            } while (!pelilauta.asetaLaivaLaudalle(laiva, lahtoKoordinaattiX, lahtoKoordinaattiY, suunta));
         }
     }
 
     public Pelilauta getVastustajanPelilauta() {
         return vastustajanPelilauta;
     }
-    
 }

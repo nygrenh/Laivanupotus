@@ -11,8 +11,9 @@ import objektit.Pelilauta;
  * Vastaa koko pelialueen piirtämisestä
  */
 public class Piirtoalusta extends JPanel {
-private Pelilauta pelilauta, vastustajanPelilauta;
-private Logiikka logiikka;
+
+    private Pelilauta pelilauta, vastustajanPelilauta;
+    private Logiikka logiikka;
 
     public Piirtoalusta(Pelilauta pelilauta, Pelilauta vastustajanPelilauta, Logiikka logiikka) {
         super.setBackground(Color.WHITE);
@@ -28,9 +29,8 @@ private Logiikka logiikka;
         PelilaudanPiirtoalusta pelilaudanPiirtoalusta = new PelilaudanPiirtoalusta(30, 30, pelilauta);
         pelilaudanPiirtoalusta.paintComponent(graphics);
         PelilaudanPiirtoalusta pelilaudanPiirtoalusta2 = new PelilaudanPiirtoalusta(360, 30, vastustajanPelilauta);
-        pelilaudanPiirtoalusta2.paintComponent(graphics);      
+        pelilaudanPiirtoalusta2.paintComponent(graphics);
     }
-    
 
     private void paivitaViesti(Graphics graphics) {
         char[] viesti = logiikka.getViesti().toCharArray();

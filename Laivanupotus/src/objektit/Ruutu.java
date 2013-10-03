@@ -4,10 +4,11 @@ package objektit;
  * Huolehtii yhteen ruutuun liityvän datan talletuksesta
  */
 public class Ruutu {
+
     private Laiva laiva;
     private boolean onPommitettu;
-    
-    public Ruutu(){
+
+    public Ruutu() {
         laiva = null;
         onPommitettu = false;
     }
@@ -16,17 +17,19 @@ public class Ruutu {
         return laiva;
     }
 
-    public boolean onPommitettu(){
+    public boolean onPommitettu() {
         return onPommitettu;
     }
-    public void pommita(){
+
+    public void pommita() {
         onPommitettu = true;
     }
-    public boolean ruudussaOnLaiva(){
+
+    public boolean ruudussaOnLaiva() {
         return laiva != null;
     }
-    
-    public void asetaruutuunLaiva(Laiva laiva){
+
+    public void asetaruutuunLaiva(Laiva laiva) {
         this.laiva = laiva;
     }
 }

@@ -10,16 +10,16 @@ import objektit.Pelilauta;
 /**
  * Vastuussa ikkunan luomisesta ja sen komponenttien luomisesta
  */
-public class Kayttolittyma implements Runnable{
+public class Kayttolittyma implements Runnable {
 
     private JFrame frame;
     private Pelilauta pelilauta, pelilauta2;
     private Logiikka logiikka;
-    
-    public void setLogiikka(Logiikka logiikka){
+
+    public void setLogiikka(Logiikka logiikka) {
         this.logiikka = logiikka;
     }
-    
+
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
@@ -44,5 +44,4 @@ public class Kayttolittyma implements Runnable{
     public void uudelleenPiirra() {
         this.frame.repaint();
     }
-    
 }
