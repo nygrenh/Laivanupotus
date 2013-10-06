@@ -1,20 +1,20 @@
-package logiikka;
+package logiikka.tekoaly;
 
 import java.util.Random;
 import objektit.Pelilauta;
 
-class Tekoaly {
+public class Tekoaly {
 
     private Pelilauta pelilauta;
     private Boolean laivanEtsintaKaynnissa;
     private int viimeinenOsumaX, viimeinenOsumaY;
 
-    Tekoaly(Pelilauta vastustajanPelilauta) {
+    public Tekoaly(Pelilauta vastustajanPelilauta) {
         this.pelilauta = vastustajanPelilauta;
         this.laivanEtsintaKaynnissa = false;
     }
 
-    void siirra() {
+    public void siirra() {
         if (laivanEtsintaKaynnissa) {
             etsiLaivaa();
         } else {
@@ -85,10 +85,10 @@ class Tekoaly {
             return false;
         }
         int x = viimeinenOsumaX, y = viimeinenOsumaY - 1;
-        if(!ruutuaKannattaaPommittaa(x, y)){
+        if (!ruutuaKannattaaPommittaa(x, y)) {
             return false;
         }
-        if(pelilauta.pommita(x, y) && pelilauta.getRuutu(x, y).getLaiva().onTuhottu()){
+        if (pelilauta.pommita(x, y) && pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
             laivanEtsintaKaynnissa = false;
         }
         return true;
