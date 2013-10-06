@@ -167,4 +167,8 @@ public class Pelilauta {
     public void vaihdaLaivoijenNakyvyytta() {
         laivatOnNakyvilla = !laivatOnNakyvilla;
     }
+
+    public boolean ruudussaOnOsuma(int x, int y) {
+        return ruutuaOnJoPommitettu(x, y) && ruudut[x][y].getLaiva() != null;
+    }
 }
