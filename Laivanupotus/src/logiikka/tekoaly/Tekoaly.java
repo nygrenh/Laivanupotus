@@ -6,8 +6,8 @@ import objektit.Pelilauta;
 public class Tekoaly {
 
     private Pelilauta pelilauta;
-    private Boolean laivanEtsintaKaynnissa;
-    private int viimeinenOsumaX, viimeinenOsumaY;
+    private Boolean laivanEtsintaKaynnissa, etsittavaLaivaOnVaakatasossa, etsittavaLaivaOnPystytasossa, siirtoOnTehty;
+    private int viimeinenOsumaX, viimeinenOsumaY, alkuperainenOsumaX, alkuperainenOsumaY;
 
     public Tekoaly(Pelilauta vastustajanPelilauta) {
         this.pelilauta = vastustajanPelilauta;
@@ -17,6 +17,7 @@ public class Tekoaly {
     public void siirra() {
         if (laivanEtsintaKaynnissa) {
             etsiLaivaa();
+            siirtoOnTehty = false;
         } else {
             pommitaSatunnaistaRuutua();
         }
@@ -31,54 +32,56 @@ public class Tekoaly {
             y = r.nextInt(pelilauta.getKoko());
         } while (pelilauta.ruutuaOnJoPommitettu(x, y));
         if (pelilauta.pommita(x, y)) {
-            laivanEtsintaKaynnissa = true;
+            aloitaLaivanEtsinta();
             this.viimeinenOsumaX = x;
             this.viimeinenOsumaY = y;
+            this.alkuperainenOsumaX = x;
+            this.alkuperainenOsumaY = y;
         }
     }
 
     private void etsiLaivaa() {
-        if (laivaKulkeeVarmastiPystysuunnassa()) {
+        if (etsittavaLaivaOnPystytasossa) {
             etsiLaivaaPystysuunnassa();
+            return;
         }
-        if (laivaKulkeeVarmastiVaakasuunnassa()) {
+        if (etsittavaLaivaOnVaakatasossa) {
+            etsiLaivaaVaakasuunnassa();
+            return;
+        }
+        if (!etsiLaivaaPystysuunnassa()) {
             etsiLaivaaVaakasuunnassa();
         }
-        etsiLaivaaPystysuunnassa();
-    }
 
-    private boolean laivaKulkeeVarmastiPystysuunnassa() {
-        if (pelilauta.ruudussaOnOsuma(viimeinenOsumaX, viimeinenOsumaY - 1)) {
-            return true;
-        }
-        if (pelilauta.ruudussaOnOsuma(viimeinenOsumaX, viimeinenOsumaY + 1)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean laivaKulkeeVarmastiVaakasuunnassa() {
-        if (pelilauta.ruudussaOnOsuma(viimeinenOsumaX - 1, viimeinenOsumaY)) {
-            return true;
-        }
-        if (pelilauta.ruudussaOnOsuma(viimeinenOsumaX + 1, viimeinenOsumaY)) {
-            return true;
-        }
-        return false;
     }
 
     private boolean etsiLaivaaPystysuunnassa() {
-        int x = viimeinenOsumaX, y = viimeinenOsumaY;
-        if (!etsiLaivaaYlosPain()) {
-            if (!etsiLaivaaAlaspain()) {
-                return false;
+        if (laivaaVoiEtsiaYlosPain()) {
+            if (!etsiLaivaaYlosPain()) {
+                viimeinenOsumaX = alkuperainenOsumaX;
+                viimeinenOsumaY = alkuperainenOsumaY;
             }
+        } else if (laivaaVoiEtsiaAlasPain()) {
+            etsiLaivaaAlaspain();
+        } else {
+            etsittavaLaivaOnVaakatasossa = true;
+            return false;
         }
         return true;
     }
 
-    private void etsiLaivaaVaakasuunnassa() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private boolean etsiLaivaaVaakasuunnassa() {
+        if (laivaaVoiEtsiaVasemmalle()) {
+            if (!etsiLaivaaVasemmalle()) {
+                viimeinenOsumaX = alkuperainenOsumaX;
+                viimeinenOsumaY = alkuperainenOsumaY;
+            }
+        } else if (laivaaVoiEtsiaOikealle()) {
+            etsiLaivaaOikealle();
+        } else {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -86,33 +89,95 @@ public class Tekoaly {
      * @return true, jos sopiva ruutu löydetty, false, jos päädytty umpikujaan
      */
     private boolean etsiLaivaaYlosPain() {
-        if (viimeinenOsumaY == 0) {
-            return false;
-        }
         int x = viimeinenOsumaX, y = viimeinenOsumaY - 1;
-        if (!ruutuaKannattaaPommittaa(x, y)) {
+        return kokeilePommittaa(x, y);
+    }
+
+    private boolean etsiLaivaaAlaspain() {
+        int x = viimeinenOsumaX, y = viimeinenOsumaY + 1;
+        return kokeilePommittaa(x, y);
+    }
+
+    private boolean etsiLaivaaVasemmalle() {
+        int x = viimeinenOsumaX - 1, y = viimeinenOsumaY;
+        return kokeilePommittaa(x, y);
+    }
+
+    private boolean etsiLaivaaOikealle() {
+        int x = viimeinenOsumaX + 1, y = viimeinenOsumaY;
+        return kokeilePommittaa(x, y);
+    }
+
+    /**
+     *
+     * Jos pommitus osuu laivaan, funktio paivittää viimeisen osuman
+     * koordinaatit.
+     *
+     * @param x
+     * @param y
+     * @return Palauttaa false, jos jouduttiin umpikujaan, palauttaa true, jos
+     * jotakin ruutua pommitettiin.
+     */
+    private boolean kokeilePommittaa(int x, int y) {
+        if (pelilauta.ruutuaOnJoPommitettu(x, y)) {
             return false;
         }
-        if (pelilauta.pommita(x, y) && pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
-            laivanEtsintaKaynnissa = false;
+        if (pelilauta.pommita(x, y)) {
+            viimeinenOsumaX = x;
+            viimeinenOsumaY = y;
+            if (pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
+                laivanEtsintaKaynnissa = false;
+                etsittavaLaivaOnPystytasossa = false;
+                etsittavaLaivaOnVaakatasossa = false;
+            }
+        } else {
+            return false;
         }
         return true;
     }
 
-    private boolean ruutuaKannattaaPommittaa(int x, int y) {
-        return !pelilauta.ruutuaOnJoPommitettu(x, y);
+    private void aloitaLaivanEtsinta() {
+        laivanEtsintaKaynnissa = true;
+        etsittavaLaivaOnPystytasossa = false;
+        etsittavaLaivaOnVaakatasossa = false;
     }
 
-    private boolean etsiLaivaaAlaspain() {
-        if (viimeinenOsumaY == pelilauta.getKoko()) {
+    private boolean laivaaVoiEtsiaYlosPain() {
+        if (viimeinenOsumaY == 0) {
             return false;
         }
-        int x = viimeinenOsumaX, y = viimeinenOsumaY + 1;
-        if (!ruutuaKannattaaPommittaa(x, y)) {
+        if (pelilauta.ruutuaOnJoPommitettu(viimeinenOsumaX, viimeinenOsumaY - 1)) {
             return false;
         }
-        if (pelilauta.pommita(x, y) && pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
-            laivanEtsintaKaynnissa = false;
+        return true;
+    }
+
+    private boolean laivaaVoiEtsiaAlasPain() {
+        if (viimeinenOsumaY == pelilauta.getKoko() - 1) {
+            return false;
+        }
+        if (pelilauta.ruutuaOnJoPommitettu(viimeinenOsumaX, viimeinenOsumaY + 1)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean laivaaVoiEtsiaVasemmalle() {
+        if (viimeinenOsumaX == 0) {
+            return false;
+        }
+        if (pelilauta.ruutuaOnJoPommitettu(viimeinenOsumaX - 1, viimeinenOsumaY)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean laivaaVoiEtsiaOikealle() {
+        if (viimeinenOsumaX == pelilauta.getKoko() - 1) {
+            return false;
+        }
+        if (pelilauta.ruutuaOnJoPommitettu(viimeinenOsumaX + 1, viimeinenOsumaY)) {
+            return false;
         }
         return true;
     }
