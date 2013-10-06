@@ -169,6 +169,9 @@ public class Pelilauta {
     }
 
     public boolean ruudussaOnOsuma(int x, int y) {
+        if(!koordinaatitOnPelilaudanRajojenSisalla(x, y)){
+            return false;
+        }
         return ruutuaOnJoPommitettu(x, y) && ruudut[x][y].getLaiva() != null;
     }
 }
