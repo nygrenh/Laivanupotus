@@ -67,9 +67,14 @@ public class Tekoaly {
         return false;
     }
 
-    private void etsiLaivaaPystysuunnassa() {
+    private boolean etsiLaivaaPystysuunnassa() {
         int x = viimeinenOsumaX, y = viimeinenOsumaY;
-        etsiLaivaaYlosPain();
+        if (!etsiLaivaaYlosPain()) {
+            if (!etsiLaivaaAlaspain()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void etsiLaivaaVaakasuunnassa() {
@@ -96,5 +101,19 @@ public class Tekoaly {
 
     private boolean ruutuaKannattaaPommittaa(int x, int y) {
         return !pelilauta.ruutuaOnJoPommitettu(x, y);
+    }
+
+    private boolean etsiLaivaaAlaspain() {
+        if (viimeinenOsumaY == pelilauta.getKoko()) {
+            return false;
+        }
+        int x = viimeinenOsumaX, y = viimeinenOsumaY + 1;
+        if (!ruutuaKannattaaPommittaa(x, y)) {
+            return false;
+        }
+        if (pelilauta.pommita(x, y) && pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
+            laivanEtsintaKaynnissa = false;
+        }
+        return true;
     }
 }
