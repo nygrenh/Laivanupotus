@@ -44,6 +44,7 @@ class Tekoaly {
         if (laivaKulkeeVarmastiVaakasuunnassa()) {
             etsiLaivaaVaakasuunnassa();
         }
+        etsiLaivaaPystysuunnassa();
     }
 
     private boolean laivaKulkeeVarmastiPystysuunnassa() {
@@ -67,10 +68,33 @@ class Tekoaly {
     }
 
     private void etsiLaivaaPystysuunnassa() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int x = viimeinenOsumaX, y = viimeinenOsumaY;
+        etsiLaivaaYlosPain();
     }
 
     private void etsiLaivaaVaakasuunnassa() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     *
+     * @return true, jos sopiva ruutu löydetty, false, jos päädytty umpikujaan
+     */
+    private boolean etsiLaivaaYlosPain() {
+        if (viimeinenOsumaY == 0) {
+            return false;
+        }
+        int x = viimeinenOsumaX, y = viimeinenOsumaY - 1;
+        if(!ruutuaKannattaaPommittaa(x, y)){
+            return false;
+        }
+        if(pelilauta.pommita(x, y) && pelilauta.getRuutu(x, y).getLaiva().onTuhottu()){
+            laivanEtsintaKaynnissa = false;
+        }
+        return true;
+    }
+
+    private boolean ruutuaKannattaaPommittaa(int x, int y) {
+        return !pelilauta.ruutuaOnJoPommitettu(x, y);
     }
 }
