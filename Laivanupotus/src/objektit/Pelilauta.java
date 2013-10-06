@@ -97,6 +97,9 @@ public class Pelilauta {
     }
 
     public Boolean laivanVoiAsettaaTahan(Laiva laiva, int alkuX, int alkuY, Boolean meneeAlaspain) {
+        if (laiva == null) {
+            return false;
+        }
         int loppuX, loppuY;
         if (meneeAlaspain) {
             loppuX = alkuX;
@@ -166,5 +169,13 @@ public class Pelilauta {
 
     public void vaihdaLaivoijenNakyvyytta() {
         laivatOnNakyvilla = !laivatOnNakyvilla;
+    }
+
+    public boolean ruudussaOnOsuma(int x, int y) {
+        try {
+            return ruutuaOnJoPommitettu(x, y) && ruudut[x][y].getLaiva() != null;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
     }
 }
