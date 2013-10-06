@@ -15,7 +15,7 @@ import objektit.Pelilauta;
 public class Logiikka {
 
     private Pelaaja pelaaja, pelaaja2;
-    private Collection<Laiva> pelaajanLaivat;
+    private Collection<Laiva> pelaajanLaivat, pelaaja2nLaivat;
     private Pelinvaihe pelinvaihe;
     private Kayttolittyma kayttolittyma;
     private long edellinenSilmukka;
@@ -28,7 +28,7 @@ public class Logiikka {
         pelaaja = new Pelaaja(kayttolittyma);
         pelaaja2 = new Pelaaja();
         pelaajanLaivat = luoUusiLaivasto();
-        Collection<Laiva> pelaaja2nLaivat = luoUusiLaivasto();
+        pelaaja2nLaivat = luoUusiLaivasto();
         pelaaja.sijoitaLaivatLaudalle(pelaaja2nLaivat);
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
         tekoaly = new Tekoaly(pelaaja.getVastustajanPelilauta());
@@ -40,6 +40,11 @@ public class Logiikka {
     public void silmukka() {
         edellinenSilmukka = System.currentTimeMillis();
         while (true) {
+            if (pelionLoppunut()) {
+                pelinvaihe = Pelinvaihe.PELILOPPU;
+                kayttolittyma.uudelleenPiirra();
+                break;
+            }
             if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU && annaAsetettavaLaiva() == null) {
                 vaihdaVuoro();
             }
@@ -100,7 +105,13 @@ public class Logiikka {
             palautettava += "Pommita vasemmanpuoleista pelilautaa";
         }
         if (pelinvaihe == Pelinvaihe.PELILOPPU) {
-            palautettava += "Peli on loppunut";
+            palautettava += "Peli on loppunut.";
+            if (pelaajaOnVoittanut()) {
+                palautettava += " Voitit pelin.";
+            } else {
+                palautettava += " Hävisit pelin";
+            }
+
         }
         return palautettava + " " + fps + "fps";
     }
@@ -171,5 +182,28 @@ public class Logiikka {
     public Boolean asetettavaLaivaMeneeAlaspain() {
         return asetettavaLaivaMeneeAlaspain;
     }
-    
+
+    public boolean pelaajaOnVoittanut() {
+        int laskuri = 0;
+        for (Laiva laiva : pelaaja2nLaivat) {
+            if (laiva.onTuhottu()) {
+                laskuri++;
+            }
+        }
+        return laskuri == pelaaja2nLaivat.size() - 1;
+    }
+
+    public boolean tietokoneOnVoittanut() {
+        int laskuri = 0;
+        for (Laiva laiva : pelaajanLaivat) {
+            if (laiva.onTuhottu()) {
+                laskuri++;
+            }
+        }
+        return laskuri == pelaajanLaivat.size() - 1;
+    }
+
+    private boolean pelionLoppunut() {
+        return pelaajaOnVoittanut() || tietokoneOnVoittanut();
+    }
 }
