@@ -96,6 +96,24 @@ public class Pelilauta {
         return true;
     }
 
+    public Boolean laivanVoiAsettaaTahan(Laiva laiva, int alkuX, int alkuY, Boolean meneeAlaspain) {
+        int loppuX, loppuY;
+        if (meneeAlaspain) {
+            loppuX = alkuX;
+            loppuY = alkuY + laiva.getPituus() - 1;
+        } else {
+            loppuX = alkuX + laiva.getPituus() - 1;
+            loppuY = alkuY;
+        }
+        if (!koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY) || !koordinaatitOnPelilaudanRajojenSisalla(loppuX, loppuY)) {
+            return false;
+        }
+        if (laivaMeneeLiianLahelleMuitaLaivoija(alkuX, alkuY, loppuX, loppuY)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      *
      * @param x x-koordinaatti

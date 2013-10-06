@@ -14,7 +14,6 @@ public class HiirenKuuntelija implements MouseListener {
 
     private Pelilauta pelilauta, pelilauta2;
     private Kayttolittyma kayttolittyma;
-    private Boolean asetettavaLaivaMeneeAlaspain;
     private Logiikka logiikka;
     private int hiirtaPainettuX, hiirtaPainettuY;
 
@@ -22,7 +21,6 @@ public class HiirenKuuntelija implements MouseListener {
         this.pelilauta = pelilauta;
         this.pelilauta2 = pelilauta2;
         this.kayttolittyma = kayttolittyma;
-        asetettavaLaivaMeneeAlaspain = true;
         this.logiikka = logiikka;
     }
 
@@ -83,7 +81,7 @@ public class HiirenKuuntelija implements MouseListener {
      */
     private void asetaLaiva(MouseEvent me) {
         if (me.getButton() == MouseEvent.BUTTON2) {
-            asetettavaLaivaMeneeAlaspain = !asetettavaLaivaMeneeAlaspain;
+            logiikka.vaihdaAsetettavanLaivanSuuntaa();
             return;
         }
         me.translatePoint(-360, -30);
@@ -91,7 +89,7 @@ public class HiirenKuuntelija implements MouseListener {
         int y = me.getY() / 30;
         Laiva asetettavaLaiva = logiikka.annaAsetettavaLaiva();
         if (asetettavaLaiva != null) {
-            pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, asetettavaLaivaMeneeAlaspain);
+            pelilauta2.asetaLaivaLaudalle(asetettavaLaiva, x, y, logiikka.asetettavaLaivaMeneeAlaspain());
         }
     }
 

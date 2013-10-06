@@ -21,6 +21,8 @@ public class Logiikka {
     private long edellinenSilmukka;
     private long fps;
     private Tekoaly tekoaly;
+    private int hiirenSijaintiX, hiirenSijaintiY;
+    private Boolean asetettavaLaivaMeneeAlaspain;
 
     public Logiikka(Kayttolittyma kayttolittyma) {
         pelaaja = new Pelaaja(kayttolittyma);
@@ -30,6 +32,9 @@ public class Logiikka {
         pelaaja.sijoitaLaivatLaudalle(pelaaja2nLaivat);
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
         tekoaly = new Tekoaly(pelaaja.getVastustajanPelilauta());
+        hiirenSijaintiX = 0;
+        hiirenSijaintiY = 0;
+        asetettavaLaivaMeneeAlaspain = true;
     }
 
     public void silmukka() {
@@ -141,4 +146,30 @@ public class Logiikka {
             vaihdaVuoro();
         }
     }
+
+    public Pelaaja getPelaaja() {
+        return pelaaja;
+    }
+
+    public void paivitaHiirenSijainti(int x, int y) {
+        this.hiirenSijaintiX = x;
+        this.hiirenSijaintiY = y;
+    }
+
+    public int getHiirenSijaintiX() {
+        return hiirenSijaintiX;
+    }
+
+    public int getHiirenSijaintiY() {
+        return hiirenSijaintiY;
+    }
+
+    public void vaihdaAsetettavanLaivanSuuntaa() {
+        asetettavaLaivaMeneeAlaspain = !asetettavaLaivaMeneeAlaspain;
+    }
+
+    public Boolean asetettavaLaivaMeneeAlaspain() {
+        return asetettavaLaivaMeneeAlaspain;
+    }
+    
 }

@@ -47,4 +47,9 @@ public class Pelaaja {
     public Pelilauta getVastustajanPelilauta() {
         return vastustajanPelilauta;
     }
+
+    public Pelilauta getPelilauta() {
+        return pelilauta;
+    }
+
 }

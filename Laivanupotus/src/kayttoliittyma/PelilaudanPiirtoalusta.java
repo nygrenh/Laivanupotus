@@ -3,6 +3,9 @@ package kayttoliittyma;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import logiikka.Logiikka;
+import logiikka.Pelinvaihe;
+import objektit.Laiva;
 import objektit.Pelilauta;
 
 /**
@@ -12,11 +15,13 @@ public class PelilaudanPiirtoalusta extends JPanel {
 
     private int x, y;
     private Pelilauta pelilauta;
+    private Logiikka logiikka;
 
-    public PelilaudanPiirtoalusta(int x, int y, Pelilauta pelilauta) {
+    public PelilaudanPiirtoalusta(int x, int y, Pelilauta pelilauta, Logiikka logiikka) {
         this.x = x;
         this.y = y;
         this.pelilauta = pelilauta;
+        this.logiikka = logiikka;
     }
 
     @Override
@@ -30,6 +35,7 @@ public class PelilaudanPiirtoalusta extends JPanel {
                 piirraRuudukko(g, x, y);
                 piirraObjektit(g, x, y);
             }
+            piirraKorostus(g);
         }
         g.translate(-this.x, -this.y);
     }
@@ -69,5 +75,40 @@ public class PelilaudanPiirtoalusta extends JPanel {
     private void piirraNakymattomatLaivat(Graphics g, int ruudunXKoordinaatti, int ruudunYKoordinaatti) {
         g.setColor(Color.GRAY);
         g.fillRect(ruudunXKoordinaatti, ruudunYKoordinaatti, 29, 29);
+    }
+
+    private void piirraKorostus(Graphics g) {
+        int x = logiikka.getHiirenSijaintiX() - this.x;
+        int y = logiikka.getHiirenSijaintiY() - this.y;
+        if (x < 0 || y < 0) {
+            return;
+        }
+        x /= 30;
+        y /= 30;
+        if (pelilauta.laivatOnNakyvilla() && logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJENSIJOITTELU) {
+            piirraHaamulaiva(g, x, y);
+        }
+    }
+
+// TODO: Refaktorioi tämä kokonaan
+    private void piirraHaamulaiva(Graphics g, int alkuX, int alkuY) {
+        Laiva seuraavaLaiva = logiikka.annaAsetettavaLaiva();
+        if (pelilauta.laivanVoiAsettaaTahan(seuraavaLaiva, alkuX, alkuY, logiikka.asetettavaLaivaMeneeAlaspain())) {
+            int loppuX, loppuY;
+            if (logiikka.asetettavaLaivaMeneeAlaspain()) {
+                loppuX = alkuX;
+                loppuY = alkuY + seuraavaLaiva.getPituus() - 1;
+            } else {
+                loppuX = alkuX + seuraavaLaiva.getPituus() - 1;
+                loppuY = alkuY;
+            }
+            for (int x = alkuX; x <= loppuX; x++) {
+                for (int y = alkuY; y <= loppuY; y++) {
+                    g.setColor(Color.BLUE);
+                    g.drawRect(x*30-1, y*30-1, 30, 30);
+                }
+            }
+        }
+
     }
 }
