@@ -55,33 +55,36 @@ public class Tekoaly {
 
     }
 
+    /**
+     *
+     * @return true, jos siirto tehtiin
+     */
     private boolean etsiLaivaaPystysuunnassa() {
-        if (laivaaVoiEtsiaYlosPain()) {
-            if (!etsiLaivaaYlosPain()) {
-                viimeinenOsumaX = alkuperainenOsumaX;
-                viimeinenOsumaY = alkuperainenOsumaY;
-            }
-        } else if (laivaaVoiEtsiaAlasPain()) {
-            etsiLaivaaAlaspain();
-        } else {
-            etsittavaLaivaOnVaakatasossa = true;
-            return false;
+        if (etsiLaivaaYlosPain()) {
+            etsittavaLaivaOnPystytasossa = true;
+            return true;
+        } else if (viimeinenOsumaY < alkuperainenOsumaY) {
+            viimeinenOsumaY = alkuperainenOsumaY;
         }
-        return true;
+        if (etsiLaivaaAlaspain()) {
+            etsittavaLaivaOnPystytasossa = true;
+            return true;
+        }
+        return false;
     }
 
     private boolean etsiLaivaaVaakasuunnassa() {
-        if (laivaaVoiEtsiaVasemmalle()) {
-            if (!etsiLaivaaVasemmalle()) {
-                viimeinenOsumaX = alkuperainenOsumaX;
-                viimeinenOsumaY = alkuperainenOsumaY;
-            }
-        } else if (laivaaVoiEtsiaOikealle()) {
-            etsiLaivaaOikealle();
-        } else {
-            return false;
+        if (etsiLaivaaVasemmalle()) {
+            etsittavaLaivaOnVaakatasossa = true;
+            return true;
+        } else if (viimeinenOsumaX < alkuperainenOsumaX) {
+            viimeinenOsumaX = alkuperainenOsumaX;
         }
-        return true;
+        if (etsiLaivaaOikealle()) {
+            etsittavaLaivaOnVaakatasossa = true;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -89,21 +92,33 @@ public class Tekoaly {
      * @return true, jos sopiva ruutu löydetty, false, jos päädytty umpikujaan
      */
     private boolean etsiLaivaaYlosPain() {
+        if (!laivaaVoiEtsiaYlosPain()) {
+            return false;
+        }
         int x = viimeinenOsumaX, y = viimeinenOsumaY - 1;
         return kokeilePommittaa(x, y);
     }
 
     private boolean etsiLaivaaAlaspain() {
+        if (!laivaaVoiEtsiaAlasPain()) {
+            return false;
+        }
         int x = viimeinenOsumaX, y = viimeinenOsumaY + 1;
         return kokeilePommittaa(x, y);
     }
 
     private boolean etsiLaivaaVasemmalle() {
+        if (!laivaaVoiEtsiaVasemmalle()) {
+            return false;
+        }
         int x = viimeinenOsumaX - 1, y = viimeinenOsumaY;
         return kokeilePommittaa(x, y);
     }
 
     private boolean etsiLaivaaOikealle() {
+        if (!laivaaVoiEtsiaOikealle()) {
+            return false;
+        }
         int x = viimeinenOsumaX + 1, y = viimeinenOsumaY;
         return kokeilePommittaa(x, y);
     }
