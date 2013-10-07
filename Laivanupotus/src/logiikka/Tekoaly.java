@@ -10,14 +10,18 @@ class Tekoaly {
     Tekoaly(Pelilauta vastustajanPelilauta) {
         this.pelilauta = vastustajanPelilauta;
     }
-
-    void siirra() {
+    
+/**
+ * 
+ * @return Palauttaa true, jos siirto osui johonkin, muuten false.
+ */
+    boolean siirra() {
         Random r = new Random();
         int x, y;
         do {
             x = r.nextInt(pelilauta.getKoko());
             y = r.nextInt(pelilauta.getKoko());
         } while (pelilauta.ruutuaOnJoPommitettu(x, y));
-        pelilauta.pommita(x, y);
+        return pelilauta.pommita(x, y);
     }
 }

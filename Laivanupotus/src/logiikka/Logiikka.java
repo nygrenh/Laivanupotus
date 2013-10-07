@@ -49,8 +49,9 @@ public class Logiikka {
                 vaihdaVuoro();
             }
             if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
-                tekoaly.siirra();
-                vaihdaVuoro();
+                if (!tekoaly.siirra()) {
+                    vaihdaVuoro();
+                }
             }
             kayttolittyma.uudelleenPiirra();
             nuku(30);
@@ -151,10 +152,18 @@ public class Logiikka {
         }
     }
 
+    /**
+     * Käsittelee pelaajan siirron. Jos pelaaja osui laivaan, vuoro ei vaihdu.
+     *
+     * @param x
+     * @param y
+     * @param pelilauta
+     */
     public void pelaaja1nSiirto(int x, int y, Pelilauta pelilauta) {
         if (!pelilauta.ruutuaOnJoPommitettu(x, y)) {
-            pelilauta.pommita(x, y);
-            vaihdaVuoro();
+            if (!pelilauta.pommita(x, y)) {
+                vaihdaVuoro();
+            }
         }
     }
 
