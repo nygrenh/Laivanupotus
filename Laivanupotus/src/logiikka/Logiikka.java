@@ -19,7 +19,6 @@ public class Logiikka {
     private Pelinvaihe pelinvaihe;
     private Kayttolittyma kayttolittyma;
     private long edellinenSilmukka;
-    private long fps;
     private Tekoaly tekoaly;
     private int hiirenSijaintiX, hiirenSijaintiY;
     private Boolean asetettavaLaivaMeneeAlaspain;
@@ -123,7 +122,7 @@ public class Logiikka {
         if(pelinvaihe == Pelinvaihe.PELAAJA2NVUORO){
             palautettava += "Odota, kun vastustaja tekee siirtonsa.";
         }
-        return palautettava + " " + fps + "fps";
+        return palautettava;
     }
 
     public void setKayttolittyma(Kayttolittyma kayttolittyma) {
@@ -146,9 +145,6 @@ public class Logiikka {
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(Logiikka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if ((System.currentTimeMillis() - edellinenSilmukka) != 0) {
-            fps = 1000 / (System.currentTimeMillis() - edellinenSilmukka);
         }
         this.edellinenSilmukka = aikaNyt;
     }
