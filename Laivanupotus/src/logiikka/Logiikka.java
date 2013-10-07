@@ -49,6 +49,12 @@ public class Logiikka {
                 vaihdaVuoro();
             }
             if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
+                try{
+                    kayttolittyma.uudelleenPiirra();
+                    Thread.sleep(437);
+                } catch(InterruptedException e){
+                    System.err.println("Ken kehtaa häiritä nukkuvan unta?");
+                }
                 if (!tekoaly.siirra()) {
                     vaihdaVuoro();
                 }
@@ -113,6 +119,9 @@ public class Logiikka {
                 palautettava += " Hävisit pelin";
             }
 
+        }
+        if(pelinvaihe == Pelinvaihe.PELAAJA2NVUORO){
+            palautettava += "Odota, kun vastustaja tekee siirtonsa.";
         }
         return palautettava + " " + fps + "fps";
     }
