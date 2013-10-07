@@ -1,5 +1,6 @@
-package logiikka;
+package logiikka.tekoaly;
 
+import logiikka.tekoaly.Tekoaly;
 import objektit.Pelilauta;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,6 @@
 package logiikka;
 
+import logiikka.tekoaly.Tekoaly;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;

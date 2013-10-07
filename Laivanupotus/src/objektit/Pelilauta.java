@@ -55,7 +55,11 @@ public class Pelilauta {
     }
 
     public boolean ruutuaOnJoPommitettu(int x, int y) {
-        return pommitetutruudut[x][y];
+        try {
+            return pommitetutruudut[x][y];
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     /**
