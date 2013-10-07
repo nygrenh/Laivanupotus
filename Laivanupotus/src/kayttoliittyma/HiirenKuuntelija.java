@@ -80,7 +80,7 @@ public class HiirenKuuntelija implements MouseListener {
      * @param me
      */
     private void asetaLaiva(MouseEvent me) {
-        if (me.getButton() == MouseEvent.BUTTON2) {
+        if (me.getButton() == MouseEvent.BUTTON3) {
             logiikka.vaihdaAsetettavanLaivanSuuntaa();
             return;
         }

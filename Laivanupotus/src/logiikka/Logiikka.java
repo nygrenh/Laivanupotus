@@ -108,7 +108,7 @@ public class Logiikka {
     public String getViesti() {
         String palautettava = "";
         if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU && annaAsetettavaLaiva() != null) {
-            palautettava += "Aseta " + annaAsetettavaLaiva().toString().toLowerCase() + " oikeanpuoleiseen pelilautaan. Hiiren rullan painaminen kääntää laivan suuntaa.";
+            palautettava += "Aseta " + annaAsetettavaLaiva().toString().toLowerCase() + " oikeanpuoleiseen pelilautaan. Hiiren oikea näppäin kääntää laivan suuntaa.";
         }
         if (pelinvaihe == Pelinvaihe.PELAAJA1NVUORO) {
             palautettava += "Pommita vasemmanpuoleista pelilautaa";
