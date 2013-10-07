@@ -190,7 +190,7 @@ public class Logiikka {
                 laskuri++;
             }
         }
-        return laskuri == pelaaja2nLaivat.size() - 1;
+        return laskuri == pelaaja2nLaivat.size();
     }
 
     public boolean tietokoneOnVoittanut() {
@@ -200,7 +200,7 @@ public class Logiikka {
                 laskuri++;
             }
         }
-        return laskuri == pelaajanLaivat.size() - 1;
+        return laskuri == pelaajanLaivat.size();
     }
 
     private boolean pelionLoppunut() {
