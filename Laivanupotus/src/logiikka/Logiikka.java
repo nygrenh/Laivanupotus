@@ -2,10 +2,10 @@ package logiikka;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objektit.Laiva;
-import toimijat.Pelaaja;
 import kayttoliittyma.Kayttolittyma;
 import objektit.Pelilauta;
 
@@ -14,7 +14,6 @@ import objektit.Pelilauta;
  */
 public class Logiikka {
 
-    private Pelaaja pelaaja, pelaaja2;
     private Collection<Laiva> pelaajanLaivat, pelaaja2nLaivat;
     private Pelinvaihe pelinvaihe;
     private Kayttolittyma kayttolittyma;
@@ -22,18 +21,21 @@ public class Logiikka {
     private Tekoaly tekoaly;
     private int hiirenSijaintiX, hiirenSijaintiY;
     private Boolean asetettavaLaivaMeneeAlaspain;
+    private Pelilauta pelilauta, vastustajanPelilauta;
 
     public Logiikka(Kayttolittyma kayttolittyma) {
-        pelaaja = new Pelaaja(kayttolittyma);
-        pelaaja2 = new Pelaaja();
+        this.pelilauta = new Pelilauta(10);
+        this.vastustajanPelilauta = new Pelilauta(10);
         pelaajanLaivat = luoUusiLaivasto();
         pelaaja2nLaivat = luoUusiLaivasto();
-        pelaaja.sijoitaLaivatLaudalle(pelaaja2nLaivat);
+        sijoitaLaivatLaudalle(pelaaja2nLaivat);
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
-        tekoaly = new Tekoaly(pelaaja.getVastustajanPelilauta());
+        tekoaly = new Tekoaly(vastustajanPelilauta);
         hiirenSijaintiX = 0;
         hiirenSijaintiY = 0;
         asetettavaLaivaMeneeAlaspain = true;
+        vastustajanPelilauta.vaihdaLaivoijenNakyvyytta();
+        kayttolittyma.setPelilautat(pelilauta, vastustajanPelilauta);
     }
 
     public void silmukka() {
@@ -48,10 +50,10 @@ public class Logiikka {
                 vaihdaVuoro();
             }
             if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
-                try{
+                try {
                     kayttolittyma.uudelleenPiirra();
                     Thread.sleep(437);
-                } catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     System.err.println("Ken kehtaa häiritä nukkuvan unta?");
                 }
                 if (!tekoaly.siirra()) {
@@ -119,7 +121,7 @@ public class Logiikka {
             }
 
         }
-        if(pelinvaihe == Pelinvaihe.PELAAJA2NVUORO){
+        if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
             palautettava += "Odota, kun vastustaja tekee siirtonsa.";
         }
         return palautettava;
@@ -172,9 +174,6 @@ public class Logiikka {
         }
     }
 
-    public Pelaaja getPelaaja() {
-        return pelaaja;
-    }
 
     public void paivitaHiirenSijainti(int x, int y) {
         this.hiirenSijaintiX = x;
@@ -219,5 +218,26 @@ public class Logiikka {
 
     private boolean pelionLoppunut() {
         return pelaajaOnVoittanut() || tietokoneOnVoittanut();
+    }
+
+    public void sijoitaLaivatLaudalle(Collection<Laiva> laivat) {
+        Random random = new Random();
+        for (Laiva laiva : laivat) {
+            int lahtoKoordinaattiX, lahtoKoordinaattiY;
+            Boolean suunta;
+            do {
+                lahtoKoordinaattiX = random.nextInt(pelilauta.getKoko());
+                lahtoKoordinaattiY = random.nextInt(pelilauta.getKoko());
+                suunta = random.nextBoolean();
+            } while (!pelilauta.asetaLaivaLaudalle(laiva, lahtoKoordinaattiX, lahtoKoordinaattiY, suunta));
+        }
+    }
+
+    public Pelilauta getVastustajanPelilauta() {
+        return vastustajanPelilauta;
+    }
+
+    public Pelilauta getPelilauta() {
+        return pelilauta;
     }
 }
