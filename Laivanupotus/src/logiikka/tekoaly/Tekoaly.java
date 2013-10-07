@@ -140,8 +140,8 @@ public class Tekoaly {
         if (pelilauta.ruutuaOnJoPommitettu(x, y)) {
             return false;
         }
-        osuikoLaivaan = pelilauta.pommita(x, y);
-        if (osuikoLaivaan) {
+        if (pelilauta.pommita(x, y)) {
+            osuikoLaivaan = true;
             viimeinenOsumaX = x;
             viimeinenOsumaY = y;
             if (pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
@@ -150,7 +150,7 @@ public class Tekoaly {
                 etsittavaLaivaOnVaakatasossa = false;
             }
         } else {
-            return false;
+            osuikoLaivaan = false;
         }
         return true;
     }
