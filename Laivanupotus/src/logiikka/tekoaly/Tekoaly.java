@@ -27,6 +27,9 @@ public class Tekoaly {
         return osuikoLaivaan;
     }
 
+    /**
+     * Pommittaa satunnaista ruutua.
+     */
     private void pommitaSatunnaistaRuutua() {
         Random r = new Random();
         int x, y;
@@ -44,6 +47,11 @@ public class Tekoaly {
         }
     }
 
+    /**
+     * Tätä metodia kutsutaan tilanteessa, jossa johonkin laivaan ollaan osuttu,
+     * ja halutaan pommittaa laiva loppuun. Tämän takia metodi yritää pommitta
+     * edellisen osuman viereisä ruutuja.
+     */
     private void etsiLaivaa() {
         if (etsittavaLaivaOnPystytasossa) {
             etsiLaivaaPystysuunnassa();
@@ -81,6 +89,10 @@ public class Tekoaly {
         return false;
     }
 
+    /**
+     *
+     * @return true, jos siirto tehtiin
+     */
     private boolean etsiLaivaaVaakasuunnassa() {
         if (etsiLaivaaVasemmalle()) {
             if (osuikoLaivaan) {
@@ -111,6 +123,10 @@ public class Tekoaly {
         return kokeilePommittaa(x, y);
     }
 
+    /**
+     *
+     * @return true, jos sopiva ruutu löydetty, false, jos päädytty umpikujaan
+     */
     private boolean etsiLaivaaAlaspain() {
         if (!laivaaVoiEtsiaAlasPain()) {
             return false;
@@ -119,6 +135,10 @@ public class Tekoaly {
         return kokeilePommittaa(x, y);
     }
 
+    /**
+     *
+     * @return true, jos sopiva ruutu löydetty, false, jos päädytty umpikujaan
+     */
     private boolean etsiLaivaaVasemmalle() {
         if (!laivaaVoiEtsiaVasemmalle()) {
             return false;
@@ -127,6 +147,10 @@ public class Tekoaly {
         return kokeilePommittaa(x, y);
     }
 
+    /**
+     *
+     * @return true, jos sopiva ruutu löydetty, false, jos päädytty umpikujaan
+     */
     private boolean etsiLaivaaOikealle() {
         if (!laivaaVoiEtsiaOikealle()) {
             return false;
@@ -164,12 +188,21 @@ public class Tekoaly {
         return true;
     }
 
+    /**
+     * Alustaa muuttujat siten, että laivojen etsintä toimii kunnolla. Kutsutaan
+     * heti osuman jälkeen.
+     */
     private void aloitaLaivanEtsinta() {
         laivanEtsintaKaynnissa = true;
         etsittavaLaivaOnPystytasossa = false;
         etsittavaLaivaOnVaakatasossa = false;
     }
 
+    /**
+     *
+     * @return True, jos etsintäkohdan yläpuolella olevaa ruutua voidaan
+     * pommittaa, muuten false
+     */
     private boolean laivaaVoiEtsiaYlosPain() {
         if (viimeinenOsumaY == 0) {
             return false;
