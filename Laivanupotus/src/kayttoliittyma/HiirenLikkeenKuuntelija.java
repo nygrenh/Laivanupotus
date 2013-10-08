@@ -1,4 +1,3 @@
-
 package kayttoliittyma;
 
 import java.awt.event.MouseEvent;
@@ -7,6 +6,7 @@ import logiikka.Logiikka;
 import objektit.Pelilauta;
 
 class HiirenLikkeenKuuntelija implements MouseMotionListener {
+
     private Pelilauta pelilauta, pelilauta2;
     private Logiikka logiikka;
 
@@ -24,5 +24,4 @@ class HiirenLikkeenKuuntelija implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         logiikka.paivitaHiirenSijainti(e.getX(), e.getY());
     }
-    
 }

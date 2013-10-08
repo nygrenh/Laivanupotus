@@ -13,14 +13,12 @@ import objektit.Pelilauta;
 public class HiirenKuuntelija implements MouseListener {
 
     private Pelilauta pelilauta, pelilauta2;
-    private Kayttolittyma kayttolittyma;
     private Logiikka logiikka;
     private int hiirtaPainettuX, hiirtaPainettuY;
 
-    public HiirenKuuntelija(Pelilauta pelilauta, Pelilauta pelilauta2, Kayttolittyma kayttolittyma, Logiikka logiikka) {
-        this.pelilauta = pelilauta;
-        this.pelilauta2 = pelilauta2;
-        this.kayttolittyma = kayttolittyma;
+    public HiirenKuuntelija(Logiikka logiikka) {
+        this.pelilauta = logiikka.getPelilauta();
+        this.pelilauta2 = logiikka.getVastustajanPelilauta();
         this.logiikka = logiikka;
     }
 

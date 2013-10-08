@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import logiikka.Logiikka;
-import objektit.Laiva;
 import objektit.Pelilauta;
 
 /**
@@ -15,10 +14,10 @@ public class Piirtoalusta extends JPanel {
     private Pelilauta pelilauta, vastustajanPelilauta;
     private Logiikka logiikka;
 
-    public Piirtoalusta(Pelilauta pelilauta, Pelilauta vastustajanPelilauta, Logiikka logiikka) {
+    public Piirtoalusta(Logiikka logiikka) {
         super.setBackground(Color.WHITE);
-        this.pelilauta = pelilauta;
-        this.vastustajanPelilauta = vastustajanPelilauta;
+        this.pelilauta = logiikka.getPelilauta();
+        this.vastustajanPelilauta = logiikka.getVastustajanPelilauta();
         this.logiikka = logiikka;
     }
 

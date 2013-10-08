@@ -25,18 +25,12 @@ public class Logiikka {
     private Pelilauta pelilauta, vastustajanPelilauta;
 
     public Logiikka(Kayttolittyma kayttolittyma) {
-        this.pelilauta = new Pelilauta(10);
-        this.vastustajanPelilauta = new Pelilauta(10);
-        pelaajanLaivat = luoUusiLaivasto();
-        pelaaja2nLaivat = luoUusiLaivasto();
-        sijoitaLaivatLaudalle(pelaaja2nLaivat);
+        alustaPelilaudat();
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
         tekoaly = new Tekoaly(vastustajanPelilauta);
         hiirenSijaintiX = 0;
         hiirenSijaintiY = 0;
         asetettavaLaivaMeneeAlaspain = true;
-        vastustajanPelilauta.vaihdaLaivoijenNakyvyytta();
-        kayttolittyma.setPelilautat(pelilauta, vastustajanPelilauta);
     }
 
     public void silmukka() {
@@ -51,12 +45,7 @@ public class Logiikka {
                 vaihdaVuoro();
             }
             if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
-                try {
-                    kayttolittyma.uudelleenPiirra();
-                    Thread.sleep(437);
-                } catch (InterruptedException e) {
-                    System.err.println("Ken kehtaa häiritä nukkuvan unta?");
-                }
+                odotaHetki();
                 if (!tekoaly.siirra()) {
                     vaihdaVuoro();
                 }
@@ -175,7 +164,6 @@ public class Logiikka {
         }
     }
 
-
     public void paivitaHiirenSijainti(int x, int y) {
         this.hiirenSijaintiX = x;
         this.hiirenSijaintiY = y;
@@ -240,5 +228,23 @@ public class Logiikka {
 
     public Pelilauta getPelilauta() {
         return pelilauta;
+    }
+
+    private void alustaPelilaudat() {
+        this.pelilauta = new Pelilauta(10);
+        this.vastustajanPelilauta = new Pelilauta(10);
+        pelaajanLaivat = luoUusiLaivasto();
+        pelaaja2nLaivat = luoUusiLaivasto();
+        vastustajanPelilauta.vaihdaLaivoijenNakyvyytta();
+        sijoitaLaivatLaudalle(pelaaja2nLaivat);
+    }
+
+    private void odotaHetki() {
+        try {
+            kayttolittyma.uudelleenPiirra();
+            Thread.sleep(437);
+        } catch (InterruptedException e) {
+            System.err.println("Ken kehtaa häiritä nukkuvan unta?");
+        }
     }
 }

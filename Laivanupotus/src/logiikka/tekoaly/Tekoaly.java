@@ -13,8 +13,9 @@ public class Tekoaly {
         this.pelilauta = vastustajanPelilauta;
         this.laivanEtsintaKaynnissa = false;
     }
+
     /**
-     * 
+     *
      * @return osuiko siirto laivaan
      */
     public boolean siirra() {
@@ -55,7 +56,7 @@ public class Tekoaly {
         if (!etsiLaivaaPystysuunnassa()) {
             etsiLaivaaVaakasuunnassa();
         }
-        
+
     }
 
     /**
@@ -64,15 +65,17 @@ public class Tekoaly {
      */
     private boolean etsiLaivaaPystysuunnassa() {
         if (etsiLaivaaYlosPain()) {
-            if(osuikoLaivaan)
-            etsittavaLaivaOnPystytasossa = true;
+            if (osuikoLaivaan) {
+                etsittavaLaivaOnPystytasossa = true;
+            }
             return true;
         } else if (viimeinenOsumaY < alkuperainenOsumaY) {
             viimeinenOsumaY = alkuperainenOsumaY;
         }
         if (etsiLaivaaAlaspain()) {
-            if(osuikoLaivaan)
-            etsittavaLaivaOnPystytasossa = true;
+            if (osuikoLaivaan) {
+                etsittavaLaivaOnPystytasossa = true;
+            }
             return true;
         }
         return false;
@@ -80,15 +83,17 @@ public class Tekoaly {
 
     private boolean etsiLaivaaVaakasuunnassa() {
         if (etsiLaivaaVasemmalle()) {
-            if(osuikoLaivaan)
-            etsittavaLaivaOnVaakatasossa = true;
+            if (osuikoLaivaan) {
+                etsittavaLaivaOnVaakatasossa = true;
+            }
             return true;
         } else if (viimeinenOsumaX < alkuperainenOsumaX) {
             viimeinenOsumaX = alkuperainenOsumaX;
         }
         if (etsiLaivaaOikealle()) {
-            if(osuikoLaivaan)
-            etsittavaLaivaOnVaakatasossa = true;
+            if (osuikoLaivaan) {
+                etsittavaLaivaOnVaakatasossa = true;
+            }
             return true;
         }
         return false;

@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import logiikka.Logiikka;
-import objektit.Pelilauta;
 
 /**
  * Vastuussa ikkunan luomisesta ja sen komponenttien luomisesta
@@ -13,7 +12,6 @@ import objektit.Pelilauta;
 public class Kayttolittyma implements Runnable {
 
     private JFrame frame;
-    private Pelilauta pelilauta, pelilauta2;
     private Logiikka logiikka;
 
     public void setLogiikka(Logiikka logiikka) {
@@ -31,15 +29,10 @@ public class Kayttolittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        Piirtoalusta piirtoalusta = new Piirtoalusta(pelilauta, pelilauta2, logiikka);
+        Piirtoalusta piirtoalusta = new Piirtoalusta(logiikka);
         container.add(piirtoalusta);
-        piirtoalusta.addMouseListener(new HiirenKuuntelija(pelilauta, pelilauta2, this, logiikka));
+        piirtoalusta.addMouseListener(new HiirenKuuntelija(logiikka));
         piirtoalusta.addMouseMotionListener(new HiirenLikkeenKuuntelija(logiikka));
-    }
-
-    public void setPelilautat(Pelilauta pelilauta, Pelilauta pelilauta2) {
-        this.pelilauta = pelilauta;
-        this.pelilauta2 = pelilauta2;
     }
 
     public void uudelleenPiirra() {

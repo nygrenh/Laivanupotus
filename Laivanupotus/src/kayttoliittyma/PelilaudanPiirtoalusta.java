@@ -105,7 +105,7 @@ public class PelilaudanPiirtoalusta extends JPanel {
             for (int x = alkuX; x <= loppuX; x++) {
                 for (int y = alkuY; y <= loppuY; y++) {
                     g.setColor(Color.BLUE);
-                    g.drawRect(x*30-1, y*30-1, 30, 30);
+                    g.drawRect(x * 30 - 1, y * 30 - 1, 30, 30);
                 }
             }
         }
