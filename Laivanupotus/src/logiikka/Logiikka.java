@@ -24,6 +24,11 @@ public class Logiikka {
     private Boolean asetettavaLaivaMeneeAlaspain;
     private Pelilauta pelilauta, vastustajanPelilauta;
 
+    /**
+     *
+     * @param kayttolittyma Ohjelman käyttöliittymä, jota voidaan piirtää
+     * uudelleen
+     */
     public Logiikka(Kayttolittyma kayttolittyma) {
         alustaPelilaudat();
         this.kayttolittyma = kayttolittyma;
@@ -34,6 +39,10 @@ public class Logiikka {
         asetettavaLaivaMeneeAlaspain = true;
     }
 
+    /**
+     * Varmistaa, että käyttöliittymä piirretään uudelleen tasaisin väliajoin,
+     * ja vastaa, että tietokone tekee omat siirtonsa
+     */
     public void silmukka() {
         edellinenSilmukka = System.currentTimeMillis();
         while (true) {
@@ -56,6 +65,12 @@ public class Logiikka {
         }
     }
 
+    /**
+     * Luo yhden pelaajan kaikki laivat
+     *
+     * @return Palauttaa kokoelman yhden pelaajan laivoista, jotka funktio on
+     * luonut
+     */
     private Collection<Laiva> luoUusiLaivasto() {
         Collection<Laiva> palautettava = new ArrayList<>();
         lisaaLaiva(palautettava, 1, "Lentotukialus", 5);
@@ -65,13 +80,26 @@ public class Logiikka {
         return palautettava;
     }
 
-    private void lisaaLaiva(Collection<Laiva> palautettava, int lukumaara, String nimi, int pituus) {
+    /**
+     * Lisää sopivan verran laivoja kokoelmaan
+     *
+     * @param kokoelma Kokoelma, johon laivat lisätään
+     * @param lukumaara Lisättävien laivojen lukumäärä
+     * @param nimi Lisättävän laivan nimi
+     * @param pituus Lisättävän laivan pituus
+     */
+    private void lisaaLaiva(Collection<Laiva> kokoelma, int lukumaara, String nimi, int pituus) {
         for (int i = 0; i < lukumaara; i++) {
             Laiva lisattavaLaiva = new Laiva(pituus, nimi);
-            palautettava.add(lisattavaLaiva);
+            kokoelma.add(lisattavaLaiva);
         }
     }
 
+    /**
+     * Palauttaa pelaajan seuraavan pelilaudalle asetettavan laivan.
+     *
+     * @return Laiva, jos asetettavia laivoja on jäljellä, muuten null
+     */
     public Laiva annaAsetettavaLaiva() {
         for (Laiva laiva : pelaajanLaivat) {
             if (laiva.onSijoitettu()) {
@@ -94,6 +122,11 @@ public class Logiikka {
         return pelinvaihe;
     }
 
+    /**
+     * Palauttaa viestin, joka näytetään pelaajalle
+     *
+     * @return
+     */
     public String getViesti() {
         String palautettava = "";
         if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU && annaAsetettavaLaiva() != null) {
@@ -117,7 +150,6 @@ public class Logiikka {
         return palautettava;
     }
 
-
     /**
      * Nukkuu sopivan verran, jottei pelin pääsilmukka tulisi aivan hulluksi
      *
@@ -138,6 +170,10 @@ public class Logiikka {
         this.edellinenSilmukka = aikaNyt;
     }
 
+    /**
+     * Vaihtaa vuoroa. Jos peli on vilä laivojen asettelussa, metodi vaihtaa
+     * vuoron käyttäjälle.
+     */
     public void vaihdaVuoro() {
         if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU || pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
             pelinvaihe = Pelinvaihe.PELAAJA1NVUORO;
@@ -182,6 +218,12 @@ public class Logiikka {
         return asetettavaLaivaMeneeAlaspain;
     }
 
+    /**
+     * Kertoo, onko pelaaja voittanut
+     *
+     * @return True, jos kaikki tietokoneen laivat ovat tuhottu. False, jos
+     * kaikki tietokoneen laivat eivät ole tuhottu
+     */
     public boolean pelaajaOnVoittanut() {
         int laskuri = 0;
         for (Laiva laiva : pelaaja2nLaivat) {
@@ -192,6 +234,12 @@ public class Logiikka {
         return laskuri == pelaaja2nLaivat.size();
     }
 
+    /**
+     * Kertoo, onko tietokone voittanut
+     *
+     * @return True, jos kaikki pelaajan laivat ovat tuhottu. False, jos kaikki
+     * pelaajan laivat eivät ole tuhottu
+     */
     public boolean tietokoneOnVoittanut() {
         int laskuri = 0;
         for (Laiva laiva : pelaajanLaivat) {
@@ -202,6 +250,11 @@ public class Logiikka {
         return laskuri == pelaajanLaivat.size();
     }
 
+    /**
+     * Kertoo, onko peli päättynyt
+     *
+     * @return True, jos joku on voittanut. False, jos kukaan ei ole voittanut.
+     */
     private boolean pelionLoppunut() {
         return pelaajaOnVoittanut() || tietokoneOnVoittanut();
     }
@@ -227,6 +280,10 @@ public class Logiikka {
         return pelilauta;
     }
 
+    /**
+     * Luo pelaajan ja tietokoneen pelilaudat ja laivat ja sijoittaa tietokoneen
+     * laivat pelilaudalle
+     */
     private void alustaPelilaudat() {
         this.pelilauta = new Pelilauta(10);
         this.vastustajanPelilauta = new Pelilauta(10);
@@ -236,6 +293,10 @@ public class Logiikka {
         sijoitaLaivatLaudalle(pelaaja2nLaivat);
     }
 
+    /**
+     * Odottaa pienen hetken. Tällä metodilla varmistetaan, että tietokone ei
+     * tee siirtojaan liian nopeasti.
+     */
     private void odotaHetki() {
         try {
             kayttolittyma.uudelleenPiirra();
