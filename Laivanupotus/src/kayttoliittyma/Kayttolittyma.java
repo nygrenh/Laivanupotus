@@ -9,7 +9,7 @@ import logiikka.Logiikka;
 /**
  * Vastuussa ikkunan luomisesta ja sen komponenttien luomisesta
  */
-public class Kayttolittyma implements Runnable {
+public class Kayttolittyma implements Runnable, UudelleenPiirrettava {
 
     private JFrame frame;
     private Logiikka logiikka;

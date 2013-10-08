@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import objektit.Laiva;
 import kayttoliittyma.Kayttolittyma;
 import objektit.Pelilauta;
+import kayttoliittyma.UudelleenPiirrettava;
 
 /**
  * Huolehtii pelin kulusta
@@ -17,7 +18,7 @@ public class Logiikka {
 
     private Collection<Laiva> pelaajanLaivat, pelaaja2nLaivat;
     private Pelinvaihe pelinvaihe;
-    private Kayttolittyma kayttolittyma;
+    private UudelleenPiirrettava kayttolittyma;
     private long edellinenSilmukka;
     private Tekoaly tekoaly;
     private int hiirenSijaintiX, hiirenSijaintiY;
@@ -29,7 +30,7 @@ public class Logiikka {
      * @param kayttolittyma Ohjelman käyttöliittymä, jota voidaan piirtää
      * uudelleen
      */
-    public Logiikka(Kayttolittyma kayttolittyma) {
+    public Logiikka(UudelleenPiirrettava kayttolittyma) {
         alustaPelilaudat();
         this.kayttolittyma = kayttolittyma;
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
