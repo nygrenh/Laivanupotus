@@ -30,7 +30,9 @@ public class Piirtoalusta extends JPanel {
         PelilaudanPiirtoalusta pelilaudanPiirtoalusta2 = new PelilaudanPiirtoalusta(360, 30, vastustajanPelilauta, logiikka);
         pelilaudanPiirtoalusta2.paintComponent(graphics);
     }
-
+    /**
+     * Piirtää pelaajalle näytettävän ohjeviestin
+     */
     private void paivitaViesti(Graphics graphics) {
         char[] viesti = logiikka.getViesti().toCharArray();
         graphics.drawChars(viesti, 0, viesti.length, 30, 19);

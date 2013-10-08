@@ -45,7 +45,7 @@ public class Laiva {
     /**
      * Tällä metodilla kerrotaan laivalle, missä ruuduissa se sijaitsee
      *
-     * @param ruudut
+     * @param ruudut Lista ruuduista, joissa laiva sijaitsee
      */
     public void asetaRuudut(List<Ruutu> ruudut) {
         this.ruudut = ruudut;
