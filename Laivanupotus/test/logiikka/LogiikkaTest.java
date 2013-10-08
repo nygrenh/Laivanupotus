@@ -31,8 +31,8 @@ public class LogiikkaTest {
         logiikka.vaihdaVuoro();
         assertEquals(Pelinvaihe.PELAAJA2NVUORO, logiikka.getPelinvaihe());
     }
-    
-        @Test
+
+    @Test
     public void pelaaja2senVuoronJalkeenSeuraaPelaaja1senVuoro() {
         logiikka.vaihdaVuoro();
         logiikka.vaihdaVuoro();

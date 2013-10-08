@@ -36,6 +36,7 @@ public class Kayttolittyma implements Runnable, UudelleenPiirrettava {
         piirtoalusta.addMouseMotionListener(new HiirenLikkeenKuuntelija(logiikka));
     }
 
+    @Override
     public void uudelleenPiirra() {
         this.frame.repaint();
     }
