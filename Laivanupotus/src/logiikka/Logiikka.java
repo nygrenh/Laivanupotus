@@ -100,7 +100,7 @@ public class Logiikka {
             palautettava += "Aseta " + annaAsetettavaLaiva().toString().toLowerCase() + " oikeanpuoleiseen pelilautaan. Hiiren oikea näppäin kääntää laivan suuntaa.";
         }
         if (pelinvaihe == Pelinvaihe.PELAAJA1NVUORO) {
-            palautettava += "Pommita vasemmanpuoleista pelilautaa";
+            palautettava += "Pommita vasemmanpuoleista pelilautaa.";
         }
         if (pelinvaihe == Pelinvaihe.PELILOPPU) {
             palautettava += "Peli on loppunut.";

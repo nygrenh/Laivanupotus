@@ -33,6 +33,6 @@ public class Piirtoalusta extends JPanel {
 
     private void paivitaViesti(Graphics graphics) {
         char[] viesti = logiikka.getViesti().toCharArray();
-        graphics.drawChars(viesti, 0, viesti.length, 15, 15);
+        graphics.drawChars(viesti, 0, viesti.length, 30, 19);
     }
 }

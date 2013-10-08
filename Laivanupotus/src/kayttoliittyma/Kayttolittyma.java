@@ -21,8 +21,9 @@ public class Kayttolittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
-        frame.setPreferredSize(new Dimension(700, 400));
+        frame.setPreferredSize(new Dimension(690, 360));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         luoKomponentit(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
