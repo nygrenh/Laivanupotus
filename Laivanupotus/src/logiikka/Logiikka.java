@@ -26,6 +26,7 @@ public class Logiikka {
 
     public Logiikka(Kayttolittyma kayttolittyma) {
         alustaPelilaudat();
+        this.kayttolittyma = kayttolittyma;
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
         tekoaly = new Tekoaly(vastustajanPelilauta);
         hiirenSijaintiX = 0;
@@ -84,7 +85,6 @@ public class Logiikka {
     public static void main(String[] args) {
         Kayttolittyma kayttolittyma = new Kayttolittyma();
         Logiikka logiikka = new Logiikka(kayttolittyma);
-        logiikka.setKayttolittyma(kayttolittyma);
         kayttolittyma.setLogiikka(logiikka);
         kayttolittyma.run();
         logiikka.silmukka();
@@ -117,9 +117,6 @@ public class Logiikka {
         return palautettava;
     }
 
-    public void setKayttolittyma(Kayttolittyma kayttolittyma) {
-        this.kayttolittyma = kayttolittyma;
-    }
 
     /**
      * Nukkuu sopivan verran, jottei pelin pääsilmukka tulisi aivan hulluksi
