@@ -38,7 +38,7 @@ public class Tekoaly {
             y = r.nextInt(pelilauta.getKoko());
         } while (pelilauta.ruutuaOnJoPommitettu(x, y));
         osuikoLaivaan = pelilauta.pommita(x, y);
-        if (osuikoLaivaan) {
+        if (osuikoLaivaan && !pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
             aloitaLaivanEtsinta();
             this.viimeinenOsumaX = x;
             this.viimeinenOsumaY = y;

@@ -56,11 +56,13 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        sukellusveneet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Laivanupotus - Uusi peli");
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(397, 267));
         setResizable(false);
 
         jTextField1.setText("10");
@@ -113,6 +115,17 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
 
         jLabel13.setText("2");
 
+        jLabel14.setText("Sukellusvene");
+
+        jLabel15.setText("1");
+
+        sukellusveneet.setText("0");
+        sukellusveneet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sukellusveneetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,34 +141,42 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel6))
                                 .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel13))))
-                                .addGap(18, 54, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(taistelulaivat, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lentotukialukset, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(risteilijat, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(havittajat, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(83, 83, 83))))
+                                            .addComponent(jLabel8)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel11)
+                                                    .addComponent(jLabel10)
+                                                    .addComponent(jLabel12)
+                                                    .addComponent(jLabel13))))
+                                        .addGap(18, 79, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(taistelulaivat, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                                                    .addComponent(lentotukialukset)
+                                                    .addComponent(risteilijat)
+                                                    .addComponent(havittajat)
+                                                    .addComponent(sukellusveneet))))
+                                        .addGap(58, 58, 58))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel15)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -201,7 +222,12 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                     .addComponent(jLabel6)
                     .addComponent(havittajat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(sukellusveneet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(virhekentta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -227,7 +253,8 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                 int taisteluLaivojenMaara = haekentanArvo(taistelulaivat);
                 int risteilijoidenMaara = haekentanArvo(risteilijat);
                 int havittajienMaara = haekentanArvo(havittajat);
-                PelinArgumentit argumentit = new PelinArgumentit(pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara);
+                int sukellusVeneidenMaara = haekentanArvo(sukellusveneet);
+                PelinArgumentit argumentit = new PelinArgumentit(pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara);
                 Logiikka.uusiPeli(argumentit);
 
             }
@@ -245,6 +272,10 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     private void lentotukialuksetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lentotukialuksetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lentotukialuksetActionPerformed
+
+    private void sukellusveneetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sukellusveneetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sukellusveneetActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField havittajat;
     private javax.swing.JButton jButton1;
@@ -253,6 +284,8 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -264,6 +297,7 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lentotukialukset;
     private javax.swing.JTextField risteilijat;
+    private javax.swing.JTextField sukellusveneet;
     private javax.swing.JTextField taistelulaivat;
     private javax.swing.JLabel virhekentta;
     // End of variables declaration//GEN-END:variables
@@ -274,13 +308,14 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     }
 
     private boolean syotteetOnLaillisia() {
-        int pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara;
+        int pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara;
         try {
             pelilaudankoko = haekentanArvo(jTextField1);
             lentotukialustenMaara = haekentanArvo(lentotukialukset);
             taisteluLaivojenMaara = haekentanArvo(taistelulaivat);
             risteilijoidenMaara = haekentanArvo(risteilijat);
             havittajienMaara = haekentanArvo(havittajat);
+            sukellusVeneidenMaara = haekentanArvo(sukellusveneet);
         } catch (NumberFormatException e) {
             virhekentta.setText("Virheellisiä arvoja");
             return false;
@@ -290,6 +325,7 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
         summa += (4 * 4 + 1) * taisteluLaivojenMaara;
         summa += (3 * 4 + 1) * risteilijoidenMaara;
         summa += (2 * 4 + 1) * havittajienMaara;
+        summa += sukellusVeneidenMaara * 5;
         if (summa > pelilaudankoko * pelilaudankoko) {
             virhekentta.setText("Laivat eivät mahdu kunnolla pelilaudalle");
             return false;

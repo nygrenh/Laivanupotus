@@ -6,20 +6,22 @@ import objektit.Laiva;
 
 public class PelinArgumentit {
 
-    private int pelilaudanKoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara;
+    private int pelilaudanKoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara;
 
     public PelinArgumentit(int pelilaudanKoko) {
-        this(pelilaudanKoko, 1, 1, 2, 2);
+        this(pelilaudanKoko, 1, 1, 2, 2, 0);
     }
 
-    public PelinArgumentit(int pelilaudanKoko, int lentotukialustenMaara, int taisteluLaivojenMaara, int risteilijoidenMaara, int havittajienMaara) {
-        this.pelilaudanKoko = pelilaudanKoko;
+    public PelinArgumentit(int pelilaudanKoko, int lentotukialustenMaara, int taisteluLaivojenMaara, int risteilijoidenMaara, int havittajienMaara, int sukellusVeneidenMaara) {
         this.pelilaudanKoko = pelilaudanKoko;
         this.lentotukialustenMaara = lentotukialustenMaara;
         this.taisteluLaivojenMaara = taisteluLaivojenMaara;
         this.risteilijoidenMaara = risteilijoidenMaara;
         this.havittajienMaara = havittajienMaara;
+        this.sukellusVeneidenMaara = sukellusVeneidenMaara;
     }
+
+
 
     /**
      * Luo yhden pelaajan kaikki laivat
@@ -33,6 +35,7 @@ public class PelinArgumentit {
         lisaaLaiva(palautettava, taisteluLaivojenMaara, "Taistelulaiva", 4);
         lisaaLaiva(palautettava, risteilijoidenMaara, "Risteilijä", 3);
         lisaaLaiva(palautettava, havittajienMaara, "Hävittäjä", 2);
+        lisaaLaiva(palautettava, sukellusVeneidenMaara, "Sukellusvene", 1);
         return palautettava;
     }
 
