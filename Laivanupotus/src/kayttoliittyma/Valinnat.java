@@ -4,6 +4,8 @@
  */
 package kayttoliittyma;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -95,6 +97,8 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
 
         havittajat.setText("2");
 
+        virhekentta.setForeground(new java.awt.Color(255, 0, 0));
+
         jLabel7.setText("Nimi");
 
         jLabel8.setText("Koko");
@@ -158,14 +162,10 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(virhekentta, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jButton1)))
+                .addGap(160, 160, 160)
+                .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(virhekentta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,25 +213,23 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         syoteetOk = true;
+        if (!syotteetOnLaillisia()) {
+            return;
+        }
+        if (ikkunaOnLiianiso()) {
+            return;
+        }
         new Thread() {
             @Override
             public void run() {
-                try {
-                    int pelilaudankoko = haekentanArvo(jTextField1);
-                    int lentotukialustenMaara = haekentanArvo(lentotukialukset);
-                    int taisteluLaivojenMaara = haekentanArvo(taistelulaivat);
-                    int risteilijoidenMaara = haekentanArvo(risteilijat);
-                    int havittajienMaara = haekentanArvo(havittajat);
-                    PelinArgumentit argumentit = new PelinArgumentit(pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara);
-                    Logiikka.uusiPeli(argumentit);
-                } catch (NumberFormatException e) {
-                    virhekentta.setText("Virheellisiä arvoja.");
-                    syoteetOk = false;
-                }
-            }
+                int pelilaudankoko = haekentanArvo(jTextField1);
+                int lentotukialustenMaara = haekentanArvo(lentotukialukset);
+                int taisteluLaivojenMaara = haekentanArvo(taistelulaivat);
+                int risteilijoidenMaara = haekentanArvo(risteilijat);
+                int havittajienMaara = haekentanArvo(havittajat);
+                PelinArgumentit argumentit = new PelinArgumentit(pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara);
+                Logiikka.uusiPeli(argumentit);
 
-            private int haekentanArvo(JTextField tekstiKentta) throws NumberFormatException {
-                return Integer.parseInt(tekstiKentta.getText());
             }
         }.start();
         try {
@@ -239,16 +237,14 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
         } catch (InterruptedException ex) {
             Logger.getLogger(Valinnat.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (syoteetOk) {
-            this.setVisible(false);
-        }
+
+        this.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void lentotukialuksetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lentotukialuksetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lentotukialuksetActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField havittajat;
     private javax.swing.JButton jButton1;
@@ -274,6 +270,48 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-       new Valinnat().setVisible(true);
+        new Valinnat().setVisible(true);
+    }
+
+    private boolean syotteetOnLaillisia() {
+        int pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara;
+        try {
+            pelilaudankoko = haekentanArvo(jTextField1);
+            lentotukialustenMaara = haekentanArvo(lentotukialukset);
+            taisteluLaivojenMaara = haekentanArvo(taistelulaivat);
+            risteilijoidenMaara = haekentanArvo(risteilijat);
+            havittajienMaara = haekentanArvo(havittajat);
+        } catch (NumberFormatException e) {
+            virhekentta.setText("Virheellisiä arvoja");
+            return false;
+        }
+        int summa = 0;
+        summa += (5 * 4 + 1) * lentotukialustenMaara;
+        summa += (4 * 4 + 1) * taisteluLaivojenMaara;
+        summa += (3 * 4 + 1) * risteilijoidenMaara;
+        summa += (2 * 4 + 1) * havittajienMaara;
+        if (summa > pelilaudankoko * pelilaudankoko) {
+            virhekentta.setText("Laivat eivät mahdu kunnolla pelilaudalle");
+            return false;
+        }
+        return true;
+    }
+
+    private int haekentanArvo(JTextField tekstiKentta) throws NumberFormatException {
+        int palautettava = Integer.parseInt(tekstiKentta.getText());
+        if (palautettava < 0) {
+            throw new NumberFormatException();
+        }
+        return palautettava;
+    }
+
+    private boolean ikkunaOnLiianiso() {
+        int pelilaudankoko = haekentanArvo(jTextField1);
+        Dimension naytonKoko = Toolkit.getDefaultToolkit().getScreenSize();
+        if ((pelilaudankoko * 2 + 3) * 30 > naytonKoko.getWidth() || (pelilaudankoko + 2) * 30 > naytonKoko.getHeight()) {
+            virhekentta.setText("Tämän kokoinen pelilauta ei mahdu näytölle");
+            return true;
+        }
+        return false;
     }
 }
