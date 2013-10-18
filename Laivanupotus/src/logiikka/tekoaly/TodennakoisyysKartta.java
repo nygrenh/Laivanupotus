@@ -20,12 +20,12 @@ class TodennakoisyysKartta {
     private TodennakoisyysRuutu[][] todennakoisyysKartta;
     private ArrayList<TodennakoisyysRuutu> ruudut;
     private Vaikeustaso vaikeustaso;
-    
-/**
- * @param pelilauta Pelilauta, jolle todennäköisyydet lasketaan
- * @param laivasto Laivat, joita etsitään
- * @param vaikeustaso Pelin vaikeustaso
- */
+
+    /**
+     * @param pelilauta Pelilauta, jolle todennäköisyydet lasketaan
+     * @param laivasto Laivat, joita etsitään
+     * @param vaikeustaso Pelin vaikeustaso
+     */
     public TodennakoisyysKartta(Pelilauta pelilauta, Collection<Laiva> laivasto, Vaikeustaso vaikeustaso) {
         this.pelilauta = pelilauta;
         this.laivasto = laivasto;
@@ -73,45 +73,14 @@ class TodennakoisyysKartta {
         }
     }
 
+    /**
+     * Lisää todennäköisyydet kaikkiin ruutuihin
+     *
+     * @param laiva Laiva, jonka kaikkia mahdollisia sijoituspaikkoja haetaan
+     */
     private void kaykaikkiRuudutLapi(Laiva laiva) {
-        for (int x = 0; x < todennakoisyysKartta.length; x++) {
-            for (int y = 0; y < todennakoisyysKartta[0].length; y++) {
-                try {
-                    Boolean kaikkiinRuutuihinMeneeLaiva = true;
-                    int loppuY = y + laiva.getPituus() - 1;
-                    for (int i = y; i <= loppuY; i++) {
-                        if (!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, i) || pelilauta.ruutuaOnJoPommitettu(x, i)) {
-                            kaikkiinRuutuihinMeneeLaiva = false;
-                        }
-                    }
-                    if (kaikkiinRuutuihinMeneeLaiva) {
-                        for (int i = y; i <= loppuY; i++) {
-                            todennakoisyysKartta[x][i].kasvataTodennakoisyytta();
-                        }
-                    }
-                } catch (IndexOutOfBoundsException e) {
-                }
-            }
-        }
-        for (int x = 0; x < todennakoisyysKartta.length; x++) {
-            for (int y = 0; y < todennakoisyysKartta[0].length; y++) {
-                try {
-                    Boolean kaikkiinRuutuihinMeneeLaiva = true;
-                    int loppuX = x + laiva.getPituus() - 1;
-                    for (int i = x; i <= loppuX; i++) {
-                        if (!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(i, y) || pelilauta.ruutuaOnJoPommitettu(i, y)) {
-                            kaikkiinRuutuihinMeneeLaiva = false;
-                        }
-                    }
-                    if (kaikkiinRuutuihinMeneeLaiva) {
-                        for (int i = x; i <= loppuX; i++) {
-                            todennakoisyysKartta[i][y].kasvataTodennakoisyytta();
-                        }
-                    }
-                } catch (IndexOutOfBoundsException e) {
-                }
-            }
-        }
+        pystysuunta(laiva);
+        vaakasuunta(laiva);
     }
 
     /**
@@ -133,5 +102,49 @@ class TodennakoisyysKartta {
         }
         Point palautettava = new Point(ruutu.getX(), ruutu.getY());
         return palautettava;
+    }
+
+    private void pystysuunta(Laiva laiva) {
+        for (int x = 0; x < todennakoisyysKartta.length; x++) {
+            for (int y = 0; y < todennakoisyysKartta[0].length; y++) {
+                try {
+                    Boolean kaikkiinRuutuihinMeneeLaiva = true;
+                    int loppuY = y + laiva.getPituus() - 1;
+                    for (int i = y; i <= loppuY; i++) {
+                        if (!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(x, i) || pelilauta.ruutuaOnJoPommitettu(x, i)) {
+                            kaikkiinRuutuihinMeneeLaiva = false;
+                        }
+                    }
+                    if (kaikkiinRuutuihinMeneeLaiva) {
+                        for (int i = y; i <= loppuY; i++) {
+                            todennakoisyysKartta[x][i].kasvataTodennakoisyytta();
+                        }
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                }
+            }
+        }
+    }
+
+    private void vaakasuunta(Laiva laiva) {
+        for (int x = 0; x < todennakoisyysKartta.length; x++) {
+            for (int y = 0; y < todennakoisyysKartta[0].length; y++) {
+                try {
+                    Boolean kaikkiinRuutuihinMeneeLaiva = true;
+                    int loppuX = x + laiva.getPituus() - 1;
+                    for (int i = x; i <= loppuX; i++) {
+                        if (!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(i, y) || pelilauta.ruutuaOnJoPommitettu(i, y)) {
+                            kaikkiinRuutuihinMeneeLaiva = false;
+                        }
+                    }
+                    if (kaikkiinRuutuihinMeneeLaiva) {
+                        for (int i = x; i <= loppuX; i++) {
+                            todennakoisyysKartta[i][y].kasvataTodennakoisyytta();
+                        }
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                }
+            }
+        }
     }
 }

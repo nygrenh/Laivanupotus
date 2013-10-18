@@ -1,7 +1,6 @@
 package logiikka;
 
 import logiikka.tekoaly.Tekoaly;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 import java.util.logging.Level;
@@ -10,7 +9,6 @@ import objektit.Laiva;
 import kayttoliittyma.Kayttolittyma;
 import objektit.Pelilauta;
 import kayttoliittyma.UudelleenPiirrettava;
-import kayttoliittyma.Valinnat;
 
 /**
  * Huolehtii pelin kulusta
@@ -24,7 +22,6 @@ public class Logiikka {
         kayttolittyma.run();
         logiikka.silmukka();
     }
-
     private Collection<Laiva> pelaajanLaivat, pelaaja2nLaivat;
     private Pelinvaihe pelinvaihe;
     private UudelleenPiirrettava kayttolittyma;
@@ -77,8 +74,6 @@ public class Logiikka {
         }
     }
 
-
-
     /**
      * Palauttaa pelaajan seuraavan pelilaudalle asetettavan laivan.
      *
@@ -93,8 +88,6 @@ public class Logiikka {
         }
         return null;
     }
-
-
 
     public Pelinvaihe getPelinvaihe() {
         return pelinvaihe;
@@ -237,6 +230,11 @@ public class Logiikka {
         return pelaajaOnVoittanut() || tietokoneOnVoittanut();
     }
 
+    /**
+     * Sijoittaa annetut laivat pelaajan pelilaudalle satunnaisiin paikoihin
+     *
+     * @param laivat Sijoitettavat laivat
+     */
     public void sijoitaLaivatLaudalle(Collection<Laiva> laivat) {
         Random random = new Random();
         for (Laiva laiva : laivat) {

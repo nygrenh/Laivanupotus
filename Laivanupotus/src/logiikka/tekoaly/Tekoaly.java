@@ -207,6 +207,11 @@ public class Tekoaly {
         return true;
     }
 
+    /**
+     *
+     * @return True, jos etsintäkohdan alapuolella olevaa ruutua voidaan
+     * pommittaa, muuten false
+     */
     private boolean laivaaVoiEtsiaAlasPain() {
         if (viimeinenOsumaY == pelilauta.getKoko() - 1) {
             return false;
@@ -217,6 +222,11 @@ public class Tekoaly {
         return true;
     }
 
+    /**
+     *
+     * @return True, jos etsintäkohdan vasemmalla puolella olevaa ruutua voidaan
+     * pommittaa, muuten false
+     */
     private boolean laivaaVoiEtsiaVasemmalle() {
         if (viimeinenOsumaX == 0) {
             return false;
@@ -227,6 +237,11 @@ public class Tekoaly {
         return true;
     }
 
+    /**
+     *
+     * @return True, jos etsintäkohdan oikealla puolella olevaa ruutua voidaan
+     * pommittaa, muuten false
+     */
     private boolean laivaaVoiEtsiaOikealle() {
         if (viimeinenOsumaX == pelilauta.getKoko() - 1) {
             return false;
