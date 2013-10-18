@@ -90,25 +90,27 @@ public class PelilaudanPiirtoalusta extends JPanel {
         }
     }
 
-// TODO: Refaktorioi tämä kokonaan
     private void piirraHaamulaiva(Graphics g, int alkuX, int alkuY) {
         Laiva seuraavaLaiva = logiikka.annaAsetettavaLaiva();
-        if (pelilauta.laivanVoiAsettaaTahan(seuraavaLaiva, alkuX, alkuY, logiikka.asetettavaLaivaMeneeAlaspain())) {
-            int loppuX, loppuY;
-            if (logiikka.asetettavaLaivaMeneeAlaspain()) {
-                loppuX = alkuX;
-                loppuY = alkuY + seuraavaLaiva.getPituus() - 1;
-            } else {
-                loppuX = alkuX + seuraavaLaiva.getPituus() - 1;
-                loppuY = alkuY;
-            }
-            for (int x = alkuX; x <= loppuX; x++) {
-                for (int y = alkuY; y <= loppuY; y++) {
-                    g.setColor(Color.BLUE);
-                    g.drawRect(x * 30 - 1, y * 30 - 1, 30, 30);
+        int loppuX, loppuY;
+        if (logiikka.asetettavaLaivaMeneeAlaspain()) {
+            loppuX = alkuX;
+            loppuY = alkuY + seuraavaLaiva.getPituus() - 1;
+        } else {
+            loppuX = alkuX + seuraavaLaiva.getPituus() - 1;
+            loppuY = alkuY;
+        }
+        for (int x = alkuX; x <= loppuX; x++) {
+            for (int y = alkuY; y <= loppuY; y++) {
+                if (pelilauta.laivanVoiAsettaaTahan(seuraavaLaiva, alkuX, alkuY, logiikka.asetettavaLaivaMeneeAlaspain())) {
+                    g.setColor(Color.GREEN);
+                } else {
+                    g.setColor(Color.red);
                 }
+                g.drawRect(x * 30 - 1, y * 30 - 1, 30, 30);
             }
         }
+
 
     }
 }
