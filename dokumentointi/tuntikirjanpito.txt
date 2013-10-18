@@ -13,3 +13,7 @@ Päivämäärä | Ajan käytön kohde | Käytetty aika
 2013-10-01 | Ohjelmointi | 5 tuntia
 2013-10-02 | Ohjelmointi | 1 tunti
 2013-10-03 | Ohjelmointi ja dokumentionti | 5 tuntia
+2013-10-06 | Ohjelmointi | 4 tuntia
+2013-10-07 | Ohjelmointi | 6 tuntia
+2013-10-08 | Dokumentointi | 1 tunti
+2013-10-18 | Ohjelmointi, dokumentointi ja viimeistely | 10 tuntia

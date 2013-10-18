@@ -275,7 +275,6 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                 int havittajienMaara = haekentanArvo(havittajat);
                 int sukellusVeneidenMaara = haekentanArvo(sukellusveneet);
                 Vaikeustaso vaikeustaso;
-                System.out.println(vaikeusTasonValinta.getSelectedItem().toString());
                 switch (vaikeusTasonValinta.getSelectedItem().toString()) {
                     case "Helppo":
                         vaikeustaso = Vaikeustaso.HELPPO;

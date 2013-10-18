@@ -36,7 +36,7 @@ class TodennakoisyysKartta {
     /**
      * Päivittää todenäköisyyslaskennat
      */
-    public void lasketodennakoisyydet() {
+    private void lasketodennakoisyydet() {
         alustaTodennakoisyyskartta();
         for (Laiva laiva : laivasto) {
             if (laiva.onTuhottu()) {
