@@ -1,0 +1,15 @@
+
+Käyttöohjeet:
+
+Ohjelma käynnistetään ajamalla Laivanupotus.jar. Aluksi tulee esille uuden pelin luomisvalikko, josta voi säätää pelilaudan kokoa ja laivojen määrää ja tietokonevastustajan vaikeustasoa. Peli aloitetaan "Aloita peli"-painikkeesta.
+
+Pelissä pelaajalle näytetään kaksi pelilautaa. Vasemmanpuoleinen pelilauta on vastustajan pelilauta, jota pelaajan on määrä pommittaa. Oikeanpuoleinen pelilauta on pelaajan pelilauta, jota tietokone pommittaa.
+
+Peli alkaa laivojen sijoittamiseen pelilaudalle. Pelaaja sijoittaa laivansa oikenpuoleiseen pelilautaan klikkaamalla haluamaansa laivan lähtöruutua. Sijoittamista tukee pelilaudan korostus, joka on vihreä kun laivan voi hiiren alla olevaan kohtaan ja punainen, kun laivaa ei voi sijoittaa hiiren alla olevaan kohtaan.
+
+Kun kaikki laivat on sijoitettu, alkaa pelivaihe. Tässä vaiheessa pelaaja ja tietokone pommittavat vuorotellen toistensa ruudukoita, kunnes toisen koko laivasto on tuhottu. Jos jompikumpi osuu toisen laivaan, saa hän uuden vuoron. 
+
+Pommituksen tuloksia kuvataan seuraavin värein:
+* Punainen = huti
+* Keltainen = osuma
+* Vihreä = tuhottu laiva
