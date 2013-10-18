@@ -1,6 +1,10 @@
 package logiikka.tekoaly;
 
+import java.awt.Point;
+import java.util.Collection;
+import java.util.List;
 import java.util.Random;
+import objektit.Laiva;
 import objektit.Pelilauta;
 
 public class Tekoaly {
@@ -8,9 +12,11 @@ public class Tekoaly {
     private Pelilauta pelilauta;
     private Boolean laivanEtsintaKaynnissa, etsittavaLaivaOnVaakatasossa, etsittavaLaivaOnPystytasossa, osuikoLaivaan;
     private int viimeinenOsumaX, viimeinenOsumaY, alkuperainenOsumaX, alkuperainenOsumaY;
+    private TodennakoisyysKartta todennakoisyysKartta;
 
-    public Tekoaly(Pelilauta vastustajanPelilauta) {
+    public Tekoaly(Pelilauta vastustajanPelilauta, Collection<Laiva> laivasto) {
         this.pelilauta = vastustajanPelilauta;
+        todennakoisyysKartta = new TodennakoisyysKartta(pelilauta, laivasto);
         this.laivanEtsintaKaynnissa = false;
     }
 
@@ -22,7 +28,8 @@ public class Tekoaly {
         if (laivanEtsintaKaynnissa) {
             etsiLaivaa();
         } else {
-            pommitaSatunnaistaRuutua();
+            pommitaTodennakoistaRuutua();
+            //pommitaSatunnaistaRuutua();
         }
         return osuikoLaivaan;
     }
@@ -241,5 +248,17 @@ public class Tekoaly {
             return false;
         }
         return true;
+    }
+
+    private void pommitaTodennakoistaRuutua() {
+        Point iskukohde = todennakoisyysKartta.annaiskukohde();
+        osuikoLaivaan = pelilauta.pommita(iskukohde.x, iskukohde.y);
+        if (osuikoLaivaan && !pelilauta.getRuutu(iskukohde.x, iskukohde.y).getLaiva().onTuhottu()) {
+            aloitaLaivanEtsinta();
+            this.viimeinenOsumaX = iskukohde.x;
+            this.viimeinenOsumaY = iskukohde.y;
+            this.alkuperainenOsumaX = iskukohde.x;
+            this.alkuperainenOsumaY = iskukohde.y;
+        }
     }
 }

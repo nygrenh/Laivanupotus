@@ -1,5 +1,7 @@
 package logiikka.tekoaly;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import objektit.Laiva;
 import objektit.Pelilauta;
 import org.junit.Before;
@@ -14,7 +16,7 @@ public class TekoalyTest {
     @Before
     public void setUp() {
         this.pelilauta = new Pelilauta(10);
-        this.tekoaly = new Tekoaly(pelilauta);
+        this.tekoaly = new Tekoaly(pelilauta, new ArrayList<Laiva>());
     }
 
     @Test
