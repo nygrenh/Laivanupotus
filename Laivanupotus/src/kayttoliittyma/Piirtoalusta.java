@@ -27,7 +27,7 @@ public class Piirtoalusta extends JPanel {
         paivitaViesti(graphics);
         PelilaudanPiirtoalusta pelilaudanPiirtoalusta = new PelilaudanPiirtoalusta(30, 30, pelilauta, logiikka);
         pelilaudanPiirtoalusta.paintComponent(graphics);
-        PelilaudanPiirtoalusta pelilaudanPiirtoalusta2 = new PelilaudanPiirtoalusta(360, 30, vastustajanPelilauta, logiikka);
+        PelilaudanPiirtoalusta pelilaudanPiirtoalusta2 = new PelilaudanPiirtoalusta((logiikka.getPelilaudanKoko() + 2) * 30, 30, vastustajanPelilauta, logiikka);
         pelilaudanPiirtoalusta2.paintComponent(graphics);
     }
     /**

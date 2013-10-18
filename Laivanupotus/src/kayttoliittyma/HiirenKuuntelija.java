@@ -82,7 +82,7 @@ public class HiirenKuuntelija implements MouseListener {
             logiikka.vaihdaAsetettavanLaivanSuuntaa();
             return;
         }
-        me.translatePoint(-360, -30);
+        me.translatePoint(-((logiikka.getPelilaudanKoko() + 2) * 30), -30);
         int x = me.getX() / 30;
         int y = me.getY() / 30;
         Laiva asetettavaLaiva = logiikka.annaAsetettavaLaiva();

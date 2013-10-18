@@ -11,7 +11,7 @@ public class LogiikkaTest {
 
     @Before
     public void setUp() {
-        logiikka = new Logiikka(new Kayttolittyma());
+        logiikka = new Logiikka(new Kayttolittyma(), new PelinArgumentit(10));
     }
 
     @Test

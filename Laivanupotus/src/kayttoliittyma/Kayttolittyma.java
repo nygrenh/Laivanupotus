@@ -21,7 +21,7 @@ public class Kayttolittyma implements Runnable, UudelleenPiirrettava {
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
-        frame.setPreferredSize(new Dimension(690, 360));
+        frame.setPreferredSize(new Dimension((logiikka.getPelilaudanKoko()*2 + 3)*30, (logiikka.getPelilaudanKoko() + 2)*30));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         luoKomponentit(frame.getContentPane());

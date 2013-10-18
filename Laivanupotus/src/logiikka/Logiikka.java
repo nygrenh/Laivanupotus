@@ -10,11 +10,20 @@ import objektit.Laiva;
 import kayttoliittyma.Kayttolittyma;
 import objektit.Pelilauta;
 import kayttoliittyma.UudelleenPiirrettava;
+import kayttoliittyma.Valinnat;
 
 /**
  * Huolehtii pelin kulusta
  */
 public class Logiikka {
+
+    public static void uusiPeli(PelinArgumentit argumentit) {
+        Kayttolittyma kayttolittyma = new Kayttolittyma();
+        Logiikka logiikka = new Logiikka(kayttolittyma, argumentit);
+        kayttolittyma.setLogiikka(logiikka);
+        kayttolittyma.run();
+        logiikka.silmukka();
+    }
 
     private Collection<Laiva> pelaajanLaivat, pelaaja2nLaivat;
     private Pelinvaihe pelinvaihe;
@@ -24,14 +33,16 @@ public class Logiikka {
     private int hiirenSijaintiX, hiirenSijaintiY;
     private Boolean asetettavaLaivaMeneeAlaspain;
     private Pelilauta pelilauta, vastustajanPelilauta;
+    private int pelilaudanKoko;
 
     /**
      *
      * @param kayttolittyma Ohjelman käyttöliittymä, jota voidaan piirtää
      * uudelleen
      */
-    public Logiikka(UudelleenPiirrettava kayttolittyma) {
-        alustaPelilaudat();
+    public Logiikka(UudelleenPiirrettava kayttolittyma, PelinArgumentit argumentit) {
+        this.pelilaudanKoko = argumentit.getPelilaudanKoko();
+        alustaPelilaudat(argumentit);
         this.kayttolittyma = kayttolittyma;
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
         tekoaly = new Tekoaly(vastustajanPelilauta);
@@ -66,35 +77,7 @@ public class Logiikka {
         }
     }
 
-    /**
-     * Luo yhden pelaajan kaikki laivat
-     *
-     * @return Palauttaa kokoelman yhden pelaajan laivoista, jotka funktio on
-     * luonut
-     */
-    private Collection<Laiva> luoUusiLaivasto() {
-        Collection<Laiva> palautettava = new ArrayList<>();
-        lisaaLaiva(palautettava, 1, "Lentotukialus", 5);
-        lisaaLaiva(palautettava, 1, "Taistelulaiva", 4);
-        lisaaLaiva(palautettava, 2, "Risteilijä", 3);
-        lisaaLaiva(palautettava, 2, "Hävittäjä", 2);
-        return palautettava;
-    }
 
-    /**
-     * Lisää sopivan verran laivoja kokoelmaan
-     *
-     * @param kokoelma Kokoelma, johon laivat lisätään
-     * @param lukumaara Lisättävien laivojen lukumäärä
-     * @param nimi Lisättävän laivan nimi
-     * @param pituus Lisättävän laivan pituus
-     */
-    private void lisaaLaiva(Collection<Laiva> kokoelma, int lukumaara, String nimi, int pituus) {
-        for (int i = 0; i < lukumaara; i++) {
-            Laiva lisattavaLaiva = new Laiva(pituus, nimi);
-            kokoelma.add(lisattavaLaiva);
-        }
-    }
 
     /**
      * Palauttaa pelaajan seuraavan pelilaudalle asetettavan laivan.
@@ -112,11 +95,7 @@ public class Logiikka {
     }
 
     public static void main(String[] args) {
-        Kayttolittyma kayttolittyma = new Kayttolittyma();
-        Logiikka logiikka = new Logiikka(kayttolittyma);
-        kayttolittyma.setLogiikka(logiikka);
-        kayttolittyma.run();
-        logiikka.silmukka();
+        new Valinnat().run();
     }
 
     public Pelinvaihe getPelinvaihe() {
@@ -285,11 +264,11 @@ public class Logiikka {
      * Luo pelaajan ja tietokoneen pelilaudat ja laivat ja sijoittaa tietokoneen
      * laivat pelilaudalle
      */
-    private void alustaPelilaudat() {
-        this.pelilauta = new Pelilauta(10);
-        this.vastustajanPelilauta = new Pelilauta(10);
-        pelaajanLaivat = luoUusiLaivasto();
-        pelaaja2nLaivat = luoUusiLaivasto();
+    private void alustaPelilaudat(PelinArgumentit argumentit) {
+        this.pelilauta = new Pelilauta(pelilaudanKoko);
+        this.vastustajanPelilauta = new Pelilauta(pelilaudanKoko);
+        pelaajanLaivat = argumentit.luoUusiLaivasto();
+        pelaaja2nLaivat = argumentit.luoUusiLaivasto();
         vastustajanPelilauta.vaihdaLaivoijenNakyvyytta();
         sijoitaLaivatLaudalle(pelaaja2nLaivat);
     }
@@ -305,5 +284,9 @@ public class Logiikka {
         } catch (InterruptedException e) {
             System.err.println("Ken kehtaa häiritä nukkuvan unta?");
         }
+    }
+
+    public int getPelilaudanKoko() {
+        return pelilaudanKoko;
     }
 }
