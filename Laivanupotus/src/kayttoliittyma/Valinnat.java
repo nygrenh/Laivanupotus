@@ -14,8 +14,7 @@ import logiikka.PelinArgumentit;
 import logiikka.tekoaly.Vaikeustaso;
 
 /**
- *
- * @author henrik
+ * Tällä ikkunalla valitaan pelin asetukset
  */
 public class Valinnat extends javax.swing.JFrame implements Runnable {
 

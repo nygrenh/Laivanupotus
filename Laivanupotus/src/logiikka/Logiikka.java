@@ -44,7 +44,7 @@ public class Logiikka {
         this.pelilaudanKoko = argumentit.getPelilaudanKoko();
         alustaPelilaudat(argumentit);
         this.kayttolittyma = kayttolittyma;
-        pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
+        pelinvaihe = Pelinvaihe.LAIVOJEN_SIJOITTELU;
         tekoaly = new Tekoaly(vastustajanPelilauta, pelaajanLaivat, argumentit.vaikeustaso);
         hiirenSijaintiX = 0;
         hiirenSijaintiY = 0;
@@ -59,14 +59,14 @@ public class Logiikka {
         edellinenSilmukka = System.currentTimeMillis();
         while (true) {
             if (pelionLoppunut()) {
-                pelinvaihe = Pelinvaihe.PELILOPPU;
+                pelinvaihe = Pelinvaihe.PELI_LOPPU;
                 kayttolittyma.uudelleenPiirra();
                 break;
             }
-            if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU && annaAsetettavaLaiva() == null) {
+            if (pelinvaihe == Pelinvaihe.LAIVOJEN_SIJOITTELU && annaAsetettavaLaiva() == null) {
                 vaihdaVuoro();
             }
-            if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
+            if (pelinvaihe == Pelinvaihe.PELAAJA_2_VUORO) {
                 odotaHetki();
                 if (!tekoaly.siirra()) {
                     vaihdaVuoro();
@@ -107,13 +107,13 @@ public class Logiikka {
      */
     public String getViesti() {
         String palautettava = "";
-        if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU && annaAsetettavaLaiva() != null) {
+        if (pelinvaihe == Pelinvaihe.LAIVOJEN_SIJOITTELU && annaAsetettavaLaiva() != null) {
             palautettava += "Aseta " + annaAsetettavaLaiva().toString().toLowerCase() + " oikeanpuoleiseen pelilautaan. Hiiren oikea näppäin kääntää laivan suuntaa.";
         }
-        if (pelinvaihe == Pelinvaihe.PELAAJA1NVUORO) {
+        if (pelinvaihe == Pelinvaihe.PELAAJA_1_VUORO) {
             palautettava += "Pommita vasemmanpuoleista pelilautaa.";
         }
-        if (pelinvaihe == Pelinvaihe.PELILOPPU) {
+        if (pelinvaihe == Pelinvaihe.PELI_LOPPU) {
             palautettava += "Peli on loppunut.";
             if (pelaajaOnVoittanut()) {
                 palautettava += " Voitit pelin.";
@@ -122,7 +122,7 @@ public class Logiikka {
             }
 
         }
-        if (pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
+        if (pelinvaihe == Pelinvaihe.PELAAJA_2_VUORO) {
             palautettava += "Odota, kun vastustaja tekee siirtonsa.";
         }
         return palautettava;
@@ -153,10 +153,10 @@ public class Logiikka {
      * vuoron käyttäjälle.
      */
     public void vaihdaVuoro() {
-        if (pelinvaihe == Pelinvaihe.LAIVOJENSIJOITTELU || pelinvaihe == Pelinvaihe.PELAAJA2NVUORO) {
-            pelinvaihe = Pelinvaihe.PELAAJA1NVUORO;
+        if (pelinvaihe == Pelinvaihe.LAIVOJEN_SIJOITTELU || pelinvaihe == Pelinvaihe.PELAAJA_2_VUORO) {
+            pelinvaihe = Pelinvaihe.PELAAJA_1_VUORO;
         } else {
-            pelinvaihe = Pelinvaihe.PELAAJA2NVUORO;
+            pelinvaihe = Pelinvaihe.PELAAJA_2_VUORO;
         }
     }
 

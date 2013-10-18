@@ -1,5 +1,8 @@
 package objektit;
 
+/**
+ * Tätä luokkaa käytetään, kun lasketaan ruutujen todennäköisyyksiä
+ */
 public class TodennakoisyysRuutu extends Ruutu {
 
     private int todennakoisyys, x, y;

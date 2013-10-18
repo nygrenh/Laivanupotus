@@ -85,13 +85,20 @@ public class PelilaudanPiirtoalusta extends JPanel {
         }
         x /= 30;
         y /= 30;
-        if (pelilauta.laivatOnNakyvilla() && logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJENSIJOITTELU) {
+        if (pelilauta.laivatOnNakyvilla() && logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJEN_SIJOITTELU) {
             piirraHaamulaiva(g, x, y);
         }
     }
 
+    /**
+     * Piirtää korostuksen laivojen sijoittamisessa
+     *
+     * @param g
+     * @param alkuX
+     * @param alkuY
+     */
     private void piirraHaamulaiva(Graphics g, int alkuX, int alkuY) {
-        if(!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY)){
+        if (!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY)) {
             return;
         }
         Laiva seuraavaLaiva = logiikka.annaAsetettavaLaiva();

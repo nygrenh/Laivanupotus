@@ -2,11 +2,13 @@ package logiikka.tekoaly;
 
 import java.awt.Point;
 import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 import objektit.Laiva;
 import objektit.Pelilauta;
 
+/**
+ * Luokka vastaa tietokoneen siirroista
+ */
 public class Tekoaly {
 
     private Pelilauta pelilauta;
@@ -14,6 +16,12 @@ public class Tekoaly {
     private int viimeinenOsumaX, viimeinenOsumaY, alkuperainenOsumaX, alkuperainenOsumaY;
     private TodennakoisyysKartta todennakoisyysKartta;
 
+    /**
+     *
+     * @param vastustajanPelilauta Pelilauta, jota pommitetaan
+     * @param laivasto Laivasto, joka halutaan tuhota
+     * @param vaikeustaso Pelin vaikeustaso
+     */
     public Tekoaly(Pelilauta vastustajanPelilauta, Collection<Laiva> laivasto, Vaikeustaso vaikeustaso) {
         this.pelilauta = vastustajanPelilauta;
         todennakoisyysKartta = new TodennakoisyysKartta(pelilauta, laivasto, vaikeustaso);
@@ -29,29 +37,8 @@ public class Tekoaly {
             etsiLaivaa();
         } else {
             pommitaTodennakoistaRuutua();
-            //pommitaSatunnaistaRuutua();
         }
         return osuikoLaivaan;
-    }
-
-    /**
-     * Pommittaa satunnaista ruutua.
-     */
-    private void pommitaSatunnaistaRuutua() {
-        Random r = new Random();
-        int x, y;
-        do {
-            x = r.nextInt(pelilauta.getKoko());
-            y = r.nextInt(pelilauta.getKoko());
-        } while (pelilauta.ruutuaOnJoPommitettu(x, y));
-        osuikoLaivaan = pelilauta.pommita(x, y);
-        if (osuikoLaivaan && !pelilauta.getRuutu(x, y).getLaiva().onTuhottu()) {
-            aloitaLaivanEtsinta();
-            this.viimeinenOsumaX = x;
-            this.viimeinenOsumaY = y;
-            this.alkuperainenOsumaX = x;
-            this.alkuperainenOsumaY = y;
-        }
     }
 
     /**
@@ -250,6 +237,9 @@ public class Tekoaly {
         return true;
     }
 
+    /**
+     * Pommittaa ruutua, jossa todennäköisesti on jotakin
+     */
     private void pommitaTodennakoistaRuutua() {
         Point iskukohde = todennakoisyysKartta.annaiskukohde();
         osuikoLaivaan = pelilauta.pommita(iskukohde.x, iskukohde.y);

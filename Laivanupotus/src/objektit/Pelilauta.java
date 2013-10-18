@@ -12,7 +12,9 @@ public class Pelilauta {
     private boolean[][] pommitetutruudut;
     private boolean[][] varatutRuudut;
     private boolean laivatOnNakyvilla;
-
+/**
+ * @param koko Pelilaudan koko. Pelilaudat ovat aina neliöitä.
+ */
     public Pelilauta(int koko) {
         ruudut = new Ruutu[koko][koko];
         pommitetutruudut = new boolean[koko][koko];
@@ -74,6 +76,9 @@ public class Pelilauta {
      * ei onnistunut
      */
     public boolean asetaLaivaLaudalle(Laiva laiva, int alkuX, int alkuY, Boolean meneeAlaspain) {
+        if (!laivanVoiAsettaaTahan(laiva, alkuX, alkuY, meneeAlaspain)) {
+            throw new IllegalArgumentException("Laivaa ei voi asettaa tähän");
+        }
         int loppuX, loppuY;
         if (meneeAlaspain) {
             loppuX = alkuX;
@@ -174,7 +179,11 @@ public class Pelilauta {
     public void vaihdaLaivoijenNakyvyytta() {
         laivatOnNakyvilla = !laivatOnNakyvilla;
     }
-
+/**
+ * @param x
+ * @param y
+ * @return True, jos ruudussa on osuma, muuten false
+ */
     public boolean ruudussaOnOsuma(int x, int y) {
         try {
             return ruutuaOnJoPommitettu(x, y) && ruudut[x][y].getLaiva() != null;

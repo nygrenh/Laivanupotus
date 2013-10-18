@@ -54,7 +54,10 @@ public class Laiva {
     public int getPituus() {
         return pituus;
     }
-
+/**
+ * Onko laiva sijoitettu
+ * @return 
+ */
     public Boolean onSijoitettu() {
         return this.ruudut != null;
     }

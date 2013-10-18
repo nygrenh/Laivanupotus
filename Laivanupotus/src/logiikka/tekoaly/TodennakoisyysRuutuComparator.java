@@ -3,6 +3,10 @@ package logiikka.tekoaly;
 import java.util.Comparator;
 import objektit.TodennakoisyysRuutu;
 
+/**
+ * Tämä vertailija laittaa ruudut, joille on laskettu todennäköisyys
+ * järjestykseen
+ */
 public class TodennakoisyysRuutuComparator implements Comparator<TodennakoisyysRuutu> {
 
     @Override

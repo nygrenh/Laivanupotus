@@ -2,15 +2,17 @@ package logiikka.tekoaly;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
-import java.util.TreeSet;
 import objektit.Laiva;
 import objektit.Pelilauta;
 import objektit.TodennakoisyysRuutu;
 
+/**
+ * Laskee jokaiselle ruudulle, millä todennäköisyydellä siinä on laiva ja
+ * ehdottaa sopivia iskuehdokkaita
+ */
 class TodennakoisyysKartta {
 
     private Pelilauta pelilauta;
@@ -18,7 +20,12 @@ class TodennakoisyysKartta {
     private TodennakoisyysRuutu[][] todennakoisyysKartta;
     private ArrayList<TodennakoisyysRuutu> ruudut;
     private Vaikeustaso vaikeustaso;
-
+    
+/**
+ * @param pelilauta Pelilauta, jolle todennäköisyydet lasketaan
+ * @param laivasto Laivat, joita etsitään
+ * @param vaikeustaso Pelin vaikeustaso
+ */
     public TodennakoisyysKartta(Pelilauta pelilauta, Collection<Laiva> laivasto, Vaikeustaso vaikeustaso) {
         this.pelilauta = pelilauta;
         this.laivasto = laivasto;
@@ -26,6 +33,9 @@ class TodennakoisyysKartta {
         todennakoisyysKartta = new TodennakoisyysRuutu[pelilauta.getKoko()][pelilauta.getKoko()];
     }
 
+    /**
+     * Päivittää todenäköisyyslaskennat
+     */
     public void lasketodennakoisyydet() {
         alustaTodennakoisyyskartta();
         for (Laiva laiva : laivasto) {
@@ -105,16 +115,22 @@ class TodennakoisyysKartta {
         }
     }
 
+    /**
+     * Antaa paikan, mihin kannattaa iskeä. Paikan nokkeluus riippuu pelin
+     * vaikeustasosta.
+     *
+     * @return Piste, jossa on halutun paikan koordinaatit.
+     */
     public Point annaiskukohde() {
         lasketodennakoisyydet();
         TodennakoisyysRuutu ruutu;
         Random random = new Random();
-        if(vaikeustaso == Vaikeustaso.HELPPO){
-            ruutu = ruudut.get((ruudut.size()-1)-random.nextInt(ruudut.size()/2));
-        } else if(vaikeustaso == Vaikeustaso.HANKALA){
+        if (vaikeustaso == Vaikeustaso.HELPPO) {
+            ruutu = ruudut.get((ruudut.size() - 1) - random.nextInt(ruudut.size() / 2));
+        } else if (vaikeustaso == Vaikeustaso.HANKALA) {
             ruutu = ruudut.get(0);
         } else {
-            ruutu = ruudut.get(random.nextInt(ruudut.size()/2));
+            ruutu = ruudut.get(random.nextInt(ruudut.size() / 2));
         }
         Point palautettava = new Point(ruutu.getX(), ruutu.getY());
         return palautettava;

@@ -16,20 +16,20 @@ public class LogiikkaTest {
 
     @Test
     public void peliAlkaaLaivojenAsettelulla() {
-        assertEquals(Pelinvaihe.LAIVOJENSIJOITTELU, logiikka.getPelinvaihe());
+        assertEquals(Pelinvaihe.LAIVOJEN_SIJOITTELU, logiikka.getPelinvaihe());
     }
 
     @Test
     public void kunKeskenLaivojenSijoittelunVaihdetaanVuoroaTuleePelaaja1senVuoro() {
         logiikka.vaihdaVuoro();
-        assertEquals(Pelinvaihe.PELAAJA1NVUORO, logiikka.getPelinvaihe());
+        assertEquals(Pelinvaihe.PELAAJA_1_VUORO, logiikka.getPelinvaihe());
     }
 
     @Test
     public void pelaaja1senVuoronJalkeenSeuraaPelaaja2senVuoro() {
         logiikka.vaihdaVuoro();
         logiikka.vaihdaVuoro();
-        assertEquals(Pelinvaihe.PELAAJA2NVUORO, logiikka.getPelinvaihe());
+        assertEquals(Pelinvaihe.PELAAJA_2_VUORO, logiikka.getPelinvaihe());
     }
 
     @Test
@@ -37,6 +37,6 @@ public class LogiikkaTest {
         logiikka.vaihdaVuoro();
         logiikka.vaihdaVuoro();
         logiikka.vaihdaVuoro();
-        assertEquals(Pelinvaihe.PELAAJA1NVUORO, logiikka.getPelinvaihe());
+        assertEquals(Pelinvaihe.PELAAJA_1_VUORO, logiikka.getPelinvaihe());
     }
 }

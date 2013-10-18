@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import logiikka.tekoaly.Vaikeustaso;
 import objektit.Laiva;
-
+/**
+ * Luokka kasaa pelin asetukset yhteen
+ */
 public class PelinArgumentit {
 
     private int pelilaudanKoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara;

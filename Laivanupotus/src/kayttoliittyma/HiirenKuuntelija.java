@@ -24,10 +24,10 @@ public class HiirenKuuntelija implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        if (logiikka.getPelinvaihe() == Pelinvaihe.PELAAJA1NVUORO) {
+        if (logiikka.getPelinvaihe() == Pelinvaihe.PELAAJA_1_VUORO) {
             pommita(me);
         }
-        if (logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJENSIJOITTELU) {
+        if (logiikka.getPelinvaihe() == Pelinvaihe.LAIVOJEN_SIJOITTELU) {
             asetaLaiva(me);
         }
     }
