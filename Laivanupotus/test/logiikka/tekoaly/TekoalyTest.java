@@ -1,7 +1,6 @@
 package logiikka.tekoaly;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import objektit.Laiva;
 import objektit.Pelilauta;
 import org.junit.Before;
@@ -16,7 +15,7 @@ public class TekoalyTest {
     @Before
     public void setUp() {
         this.pelilauta = new Pelilauta(10);
-        this.tekoaly = new Tekoaly(pelilauta, new ArrayList<Laiva>());
+        this.tekoaly = new Tekoaly(pelilauta, new ArrayList<Laiva>(), Vaikeustaso.HANKALA);
     }
 
     @Test
@@ -33,8 +32,8 @@ public class TekoalyTest {
     }
 
     /**
-     * Ei ole ihan idioottivarma, mutta ainoa tapa testata
-     * asiaa, koska kaikki muut luokan metodit ovat yksityisiä
+     * Ei ole ihan idioottivarma, mutta ainoa tapa testata asiaa, koska kaikki
+     * muut luokan metodit ovat yksityisiä
      */
     @Test
     public void siirraYrittaaEtsiaLaivaaOsumanJalkeen() {
