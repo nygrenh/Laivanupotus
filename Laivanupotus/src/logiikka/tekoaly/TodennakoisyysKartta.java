@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 import java.util.TreeSet;
 import objektit.Laiva;
 import objektit.Pelilauta;
@@ -16,10 +17,12 @@ class TodennakoisyysKartta {
     private Collection<Laiva> laivasto;
     private TodennakoisyysRuutu[][] todennakoisyysKartta;
     private ArrayList<TodennakoisyysRuutu> ruudut;
+    private Vaikeustaso vaikeustaso;
 
-    public TodennakoisyysKartta(Pelilauta pelilauta, Collection<Laiva> laivasto) {
+    public TodennakoisyysKartta(Pelilauta pelilauta, Collection<Laiva> laivasto, Vaikeustaso vaikeustaso) {
         this.pelilauta = pelilauta;
         this.laivasto = laivasto;
+        this.vaikeustaso = vaikeustaso;
         todennakoisyysKartta = new TodennakoisyysRuutu[pelilauta.getKoko()][pelilauta.getKoko()];
     }
 
@@ -34,8 +37,8 @@ class TodennakoisyysKartta {
         tulostaTodennakoisyyskartta();
         ruudut = new ArrayList<>();
         for (TodennakoisyysRuutu[] ruuturivi : todennakoisyysKartta) {
-            for(TodennakoisyysRuutu ruutu : ruuturivi){
-                if(!pelilauta.ruutuaOnJoPommitettu(ruutu.getX(), ruutu.getY())){
+            for (TodennakoisyysRuutu ruutu : ruuturivi) {
+                if (!pelilauta.ruutuaOnJoPommitettu(ruutu.getX(), ruutu.getY())) {
                     ruudut.add(ruutu);
                 }
             }
@@ -55,7 +58,7 @@ class TodennakoisyysKartta {
         System.out.println("Todennäköisyyskartta:");
         for (int i = 0; i < todennakoisyysKartta.length; i++) {
             for (int j = 0; j < todennakoisyysKartta[0].length; j++) {
-                System.out.print(todennakoisyysKartta[i][j].getTodennakoisyys() + "  ");
+                System.out.print(todennakoisyysKartta[j][i].getTodennakoisyys() + "  ");
             }
             System.out.println();
         }
@@ -104,7 +107,15 @@ class TodennakoisyysKartta {
 
     public Point annaiskukohde() {
         lasketodennakoisyydet();
-        TodennakoisyysRuutu ruutu = ruudut.get(0);
+        TodennakoisyysRuutu ruutu;
+        Random random = new Random();
+        if(vaikeustaso == Vaikeustaso.HELPPO){
+            ruutu = ruudut.get((ruudut.size()-1)-random.nextInt(ruudut.size()/2));
+        } else if(vaikeustaso == Vaikeustaso.HANKALA){
+            ruutu = ruudut.get(0);
+        } else {
+            ruutu = ruudut.get(random.nextInt(ruudut.size()/2));
+        }
         Point palautettava = new Point(ruutu.getX(), ruutu.getY());
         return palautettava;
     }

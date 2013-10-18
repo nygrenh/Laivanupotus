@@ -45,7 +45,7 @@ public class Logiikka {
         alustaPelilaudat(argumentit);
         this.kayttolittyma = kayttolittyma;
         pelinvaihe = Pelinvaihe.LAIVOJENSIJOITTELU;
-        tekoaly = new Tekoaly(vastustajanPelilauta, pelaajanLaivat);
+        tekoaly = new Tekoaly(vastustajanPelilauta, pelaajanLaivat, argumentit.vaikeustaso);
         hiirenSijaintiX = 0;
         hiirenSijaintiY = 0;
         asetettavaLaivaMeneeAlaspain = true;

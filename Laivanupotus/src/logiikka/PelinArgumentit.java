@@ -2,25 +2,27 @@ package logiikka;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import logiikka.tekoaly.Vaikeustaso;
 import objektit.Laiva;
 
 public class PelinArgumentit {
 
     private int pelilaudanKoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara;
+    public Vaikeustaso vaikeustaso;
 
     public PelinArgumentit(int pelilaudanKoko) {
-        this(pelilaudanKoko, 1, 1, 2, 2, 0);
+        this(pelilaudanKoko, 1, 1, 2, 2, 0, Vaikeustaso.HANKALA);
     }
 
-    public PelinArgumentit(int pelilaudanKoko, int lentotukialustenMaara, int taisteluLaivojenMaara, int risteilijoidenMaara, int havittajienMaara, int sukellusVeneidenMaara) {
+    public PelinArgumentit(int pelilaudanKoko, int lentotukialustenMaara, int taisteluLaivojenMaara, int risteilijoidenMaara, int havittajienMaara, int sukellusVeneidenMaara, Vaikeustaso vaikeustaso) {
         this.pelilaudanKoko = pelilaudanKoko;
         this.lentotukialustenMaara = lentotukialustenMaara;
         this.taisteluLaivojenMaara = taisteluLaivojenMaara;
         this.risteilijoidenMaara = risteilijoidenMaara;
         this.havittajienMaara = havittajienMaara;
         this.sukellusVeneidenMaara = sukellusVeneidenMaara;
+        this.vaikeustaso = vaikeustaso;
     }
-
 
 
     /**

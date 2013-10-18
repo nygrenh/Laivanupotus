@@ -14,9 +14,9 @@ public class Tekoaly {
     private int viimeinenOsumaX, viimeinenOsumaY, alkuperainenOsumaX, alkuperainenOsumaY;
     private TodennakoisyysKartta todennakoisyysKartta;
 
-    public Tekoaly(Pelilauta vastustajanPelilauta, Collection<Laiva> laivasto) {
+    public Tekoaly(Pelilauta vastustajanPelilauta, Collection<Laiva> laivasto, Vaikeustaso vaikeustaso) {
         this.pelilauta = vastustajanPelilauta;
-        todennakoisyysKartta = new TodennakoisyysKartta(pelilauta, laivasto);
+        todennakoisyysKartta = new TodennakoisyysKartta(pelilauta, laivasto, vaikeustaso);
         this.laivanEtsintaKaynnissa = false;
     }
 

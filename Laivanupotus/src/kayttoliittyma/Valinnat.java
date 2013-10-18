@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 import logiikka.Logiikka;
 import logiikka.PelinArgumentit;
+import logiikka.tekoaly.Vaikeustaso;
 
 /**
  *
@@ -59,6 +60,8 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         sukellusveneet = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        vaikeusTasonValinta = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Laivanupotus - Uusi peli");
@@ -126,13 +129,32 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        jLabel16.setText("Vaikeustaso");
+
+        vaikeusTasonValinta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Helppo", "Keskitaso", "Vaikea" }));
+        vaikeusTasonValinta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaikeusTasonValintaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(virhekentta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(37, 37, 37)
+                        .addComponent(vaikeusTasonValinta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addContainerGap())
@@ -161,7 +183,7 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                                                     .addComponent(jLabel10)
                                                     .addComponent(jLabel12)
                                                     .addComponent(jLabel13))))
-                                        .addGap(18, 79, Short.MAX_VALUE)
+                                        .addGap(18, 100, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
                                             .addGroup(layout.createSequentialGroup()
@@ -182,11 +204,6 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(virhekentta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,9 +244,13 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                     .addComponent(jLabel14)
                     .addComponent(jLabel15)
                     .addComponent(sukellusveneet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(vaikeusTasonValinta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(virhekentta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -254,7 +275,19 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
                 int risteilijoidenMaara = haekentanArvo(risteilijat);
                 int havittajienMaara = haekentanArvo(havittajat);
                 int sukellusVeneidenMaara = haekentanArvo(sukellusveneet);
-                PelinArgumentit argumentit = new PelinArgumentit(pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara);
+                Vaikeustaso vaikeustaso;
+                System.out.println(vaikeusTasonValinta.getSelectedItem().toString());
+                switch (vaikeusTasonValinta.getSelectedItem().toString()) {
+                    case "Helppo":
+                        vaikeustaso = Vaikeustaso.HELPPO;
+                        break;
+                    case "Keskitaso":
+                        vaikeustaso = Vaikeustaso.KESKITASO;
+                        break;
+                    default:
+                        vaikeustaso = Vaikeustaso.HANKALA;
+                }
+                PelinArgumentit argumentit = new PelinArgumentit(pelilaudankoko, lentotukialustenMaara, taisteluLaivojenMaara, risteilijoidenMaara, havittajienMaara, sukellusVeneidenMaara, vaikeustaso);
                 Logiikka.uusiPeli(argumentit);
 
             }
@@ -276,6 +309,10 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     private void sukellusveneetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sukellusveneetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sukellusveneetActionPerformed
+
+    private void vaikeusTasonValintaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaikeusTasonValintaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vaikeusTasonValintaActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField havittajat;
     private javax.swing.JButton jButton1;
@@ -286,6 +323,7 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -299,6 +337,7 @@ public class Valinnat extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField risteilijat;
     private javax.swing.JTextField sukellusveneet;
     private javax.swing.JTextField taistelulaivat;
+    private javax.swing.JComboBox vaikeusTasonValinta;
     private javax.swing.JLabel virhekentta;
     // End of variables declaration//GEN-END:variables
 
