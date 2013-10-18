@@ -94,9 +94,7 @@ public class Logiikka {
         return null;
     }
 
-    public static void main(String[] args) {
-        new Valinnat().run();
-    }
+
 
     public Pelinvaihe getPelinvaihe() {
         return pelinvaihe;
