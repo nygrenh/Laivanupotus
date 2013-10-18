@@ -76,9 +76,7 @@ public class Pelilauta {
      * ei onnistunut
      */
     public boolean asetaLaivaLaudalle(Laiva laiva, int alkuX, int alkuY, Boolean meneeAlaspain) {
-        if (!laivanVoiAsettaaTahan(laiva, alkuX, alkuY, meneeAlaspain)) {
-            throw new IllegalArgumentException("Laivaa ei voi asettaa tähän");
-        }
+
         int loppuX, loppuY;
         if (meneeAlaspain) {
             loppuX = alkuX;

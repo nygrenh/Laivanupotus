@@ -44,7 +44,7 @@ public class Tekoaly {
     /**
      * Tätä metodia kutsutaan tilanteessa, jossa johonkin laivaan ollaan osuttu,
      * ja halutaan pommittaa laiva loppuun. Tämän takia metodi yritää pommitta
-     * edellisen osuman viereisä ruutuja.
+     * edellisen osuman viereisiä ruutuja.
      */
     private void etsiLaivaa() {
         if (etsittavaLaivaOnPystytasossa) {

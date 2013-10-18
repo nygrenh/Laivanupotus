@@ -44,7 +44,6 @@ class TodennakoisyysKartta {
             }
             kaykaikkiRuudutLapi(laiva);
         }
-        tulostaTodennakoisyyskartta();
         ruudut = new ArrayList<>();
         for (TodennakoisyysRuutu[] ruuturivi : todennakoisyysKartta) {
             for (TodennakoisyysRuutu ruutu : ruuturivi) {
