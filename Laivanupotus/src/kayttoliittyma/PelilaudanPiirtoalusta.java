@@ -91,6 +91,9 @@ public class PelilaudanPiirtoalusta extends JPanel {
     }
 
     private void piirraHaamulaiva(Graphics g, int alkuX, int alkuY) {
+        if(!pelilauta.koordinaatitOnPelilaudanRajojenSisalla(alkuX, alkuY)){
+            return;
+        }
         Laiva seuraavaLaiva = logiikka.annaAsetettavaLaiva();
         int loppuX, loppuY;
         if (logiikka.asetettavaLaivaMeneeAlaspain()) {
